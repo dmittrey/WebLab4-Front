@@ -1,7 +1,7 @@
 <div class="switch-contents">
-  <input id="login" type="radio" name="layout" checked>
+  <input id="login" type="radio" name="layout" (click)="switchAuth()" checked>
   <label for="login">Sign in</label>
 
-  <input id="register" type="radio" name="layout">
+  <input id="register" type="radio" name="layout" (click)="switchAuth()">
   <label for="register">Sign up</label>
 </div>

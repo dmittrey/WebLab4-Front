@@ -7,10 +7,6 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AuthFormRegisterComponent implements OnInit {
 
-  login = ''
-  password = ''
-  s_password = ''
-
   constructor() {
     // this.item = new HTMLInputElement();
   }
