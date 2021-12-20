@@ -10,6 +10,7 @@ import {AuthFormRegisterComponent} from './auth/auth-form-register/auth-form-reg
 import {AuthFormButtonComponent} from './auth/auth-form-button/auth-form-button.component';
 import {AuthFormSwitcherComponent} from './auth/auth-form-switcher/auth-form-switcher.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { AlertFieldComponent } from './alert-field/alert-field.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     AuthFormLoginComponent,
     AuthFormRegisterComponent,
     AuthFormButtonComponent,
-    AuthFormSwitcherComponent
+    AuthFormSwitcherComponent,
+    AlertFieldComponent
   ],
   imports: [
     BrowserModule,

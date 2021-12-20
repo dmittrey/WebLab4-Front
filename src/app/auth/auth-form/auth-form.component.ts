@@ -11,7 +11,7 @@ import {AuthFormSwitcherComponent} from "../auth-form-switcher/auth-form-switche
   styleUrls: ['./auth-form.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class AuthFormComponent implements OnInit, AfterViewInit {
+export class AuthFormComponent implements AfterViewInit {
 
   /* Child components */
   @ViewChild(AuthFormLoginComponent)
@@ -45,19 +45,14 @@ export class AuthFormComponent implements OnInit, AfterViewInit {
 
   submitAuth() {
     console.log("Submitted");
-    //Логика отправки формы
-  }
+    if (this.loginComponent.loginFormGroup.valid) {
 
-  constructor() {
+    }
   }
 
   /* Refreshing child components variables */
   ngAfterViewInit() {
     setTimeout(() => this.authStatus = () => this.authSwitcher.authStatus, 0);
-  }
-
-  ngOnInit() {
-
   }
 
 }

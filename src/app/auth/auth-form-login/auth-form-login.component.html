@@ -1,7 +1,75 @@
-<label for="username">Username:</label>
-<input type="text" placeholder="Username" id="username">
-<!--    <label>Value: {{ getPassword() }} </label>-->
+<form [formGroup]="loginFormGroup">
 
-<label for="password">Password:</label>
-<input type="password" placeholder="Password" id="password">
-<!--    <label>Value: {{ getPassword() }} </label>-->
+  <label for="username">Username:</label>
+  <input type="text" placeholder="Username" id="username" formControlName="username">
+
+  <div *ngIf="username.dirty
+          || username.touched" id="usernameAlerts">
+
+    <!--    1. Username field is Required-->
+    <div *ngIf="username.hasError('required')">
+      <app-alert-field className="requiredAlert"
+                       innerText="Enter an username!"></app-alert-field>
+    </div>
+
+    <!--    2. check length of username-->
+    <div
+      *ngIf="username.hasError('minlength')
+          || username.hasError('maxlength')">
+      <app-alert-field className="lengthAlert"
+                       innerText="Username should have more 3 and less 30 symbols!"></app-alert-field>
+    </div>
+
+    <!--    3. check whether the entered username has a special character-->
+    <div *ngIf="username.hasError('pattern')">
+      <app-alert-field className="patternAlert"
+                       innerText="Username has should have only symbols [^[a-zA-Z-0123456789]*$]!"></app-alert-field>
+    </div>
+
+  </div>
+
+  <label for="password">Password:</label>
+  <input type="password" placeholder="Password" id="password" formControlName="password">
+
+  <div *ngIf="password.dirty
+          || password.touched" id="passwordAlerts">
+
+    <!--    1. Password Field is Required-->
+    <div *ngIf="password.hasError('required')">
+      <app-alert-field className="requiredAlert"
+                       innerText="Enter a password!"></app-alert-field>
+    </div>
+
+    <!--    2. check whether the entered password has a number-->
+    <div *ngIf="password.hasError('hasNumber')">
+      <app-alert-field className="hasNumberAlert"
+                       innerText="Password should have a number!"></app-alert-field>
+    </div>
+
+    <!--    3. check whether the entered password has upper case letter-->
+    <div *ngIf="password.hasError('hasCapitalCase')">
+      <app-alert-field className="hasCapitalCaseAlert"
+                       innerText="Password should have a capital case!"></app-alert-field>
+    </div>
+
+    <!--    4. check whether the entered password has a lower-case letter-->
+    <div *ngIf="password.hasError('hasSmallCase')">
+      <app-alert-field className="hasSmallCaseAlert"
+                       innerText="Password should have a small case!"></app-alert-field>
+    </div>
+
+    <!--    5. check whether the entered password has a special character-->
+    <div *ngIf="password.hasError('hasSpecialCharacters')">
+      <app-alert-field className="hasSpecialCharactersAlert"
+                       innerText="Password should have a special characters: [!@#$%^&*()_+-=[]{};':|,.<>\/?]"></app-alert-field>
+    </div>
+
+    <!--    6. Has a minimum length of 8 characters-->
+    <div *ngIf="password.hasError('minlength')">
+      <app-alert-field className="minlengthAlert"
+                       innerText="Password should have more 3 and less 30 symbols!"></app-alert-field>
+    </div>
+
+  </div>
+
+</form>

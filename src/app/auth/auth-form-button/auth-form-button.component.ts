@@ -6,5 +6,4 @@ import {Component} from '@angular/core';
   styleUrls: ['./auth-form-button.component.scss']
 })
 export class AuthFormButtonComponent {
-
 }
