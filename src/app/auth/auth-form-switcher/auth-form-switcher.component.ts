@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {AuthStatus} from "../authStatus";
+import {AuthStatus} from "../AuthStatus";
 
 @Component({
   selector: 'app-auth-form-switcher',

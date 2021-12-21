@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {AuthStatus} from "../authStatus";
+import {AuthStatus} from "../AuthStatus";
 import {AuthFormLoginComponent} from "../auth-form-login/auth-form-login.component";
 import {AuthFormRegisterComponent} from "../auth-form-register/auth-form-register.component";
 import {AuthFormButtonComponent} from "../auth-form-button/auth-form-button.component";
@@ -45,9 +45,9 @@ export class AuthFormComponent implements AfterViewInit {
 
   submitAuth() {
     console.log("Submitted");
-    if (this.loginComponent.loginFormGroup.valid) {
-
-    }
+    console.log(
+      (this.isLoginStatus()) ? this.loginComponent.loginFormGroup.value : this.registerComponent.loginFormGroup.value
+    );
   }
 
   /* Refreshing child components variables */
