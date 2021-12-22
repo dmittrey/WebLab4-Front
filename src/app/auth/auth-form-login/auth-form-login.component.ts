@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 import {CustomValidators} from "../CustomValidators";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-auth-form-login',
@@ -44,6 +45,8 @@ export class AuthFormLoginComponent {
     ]))
   });
 
+  // todo Подумать когда подписать а когда отписать
+
   get username() {
     return this.loginFormGroup.controls['username'];
   }
@@ -51,5 +54,4 @@ export class AuthFormLoginComponent {
   get password() {
     return this.loginFormGroup.controls['password'];
   }
-
 }
