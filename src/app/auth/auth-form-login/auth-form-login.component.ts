@@ -46,17 +46,12 @@ export class AuthFormLoginComponent {
     ])]
   });
 
-  /**
-   * Логика отправления формы
-   */
   submit() {
     if (this.loginFormGroup.valid) {
-      console.log(this.loginFormGroup.value);
+      // console.log(this.loginFormGroup.value);
       this.login.emit(this.loginFormGroup);
     }
   }
-
-  // todo Подумать когда подписать а когда отписать
 
   get username() {
     return this.loginFormGroup.controls['username'];

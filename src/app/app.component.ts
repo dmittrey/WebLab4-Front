@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-//todo Дата будет шейрится сюда и потом соответственно мы будет менять компоненты
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

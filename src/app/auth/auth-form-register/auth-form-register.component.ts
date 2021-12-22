@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+
 import {FormGroup, Validators} from "@angular/forms";
+
 import {CustomValidators} from "../CustomValidators";
+
 import {FormBuilder} from '@angular/forms';
 
 @Component({
@@ -48,9 +51,6 @@ export class AuthFormRegisterComponent {
     validator: CustomValidators.passwordMatchValidator
   })
 
-  /**
-   * Логика отправления формы
-   */
   submit() {
     // Если подтвердили то прокидываем вверх
     if (this.loginFormGroup.valid) {

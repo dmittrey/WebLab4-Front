@@ -10,12 +10,11 @@ import {AuthFormRegisterComponent} from './auth/auth-form-register/auth-form-reg
 import {AuthFormButtonComponent} from './auth/auth-form-button/auth-form-button.component';
 import {AuthFormSwitcherComponent} from './auth/auth-form-switcher/auth-form-switcher.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { AlertFieldComponent } from './alert-field/alert-field.component';
-import { HttpClientModule } from '@angular/common/http';
+import {AlertFieldComponent} from './alert-field/alert-field.component';
+import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from "./services/auth.service";
 import {HandleErrorService} from "./services/handle.error.service";
-import {RegisterService} from "./services/register.service";
-
+import {FormConverterService} from "./services/form.converter.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +33,7 @@ import {RegisterService} from "./services/register.service";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, HandleErrorService, RegisterService],
+  providers: [AuthService, HandleErrorService, FormConverterService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

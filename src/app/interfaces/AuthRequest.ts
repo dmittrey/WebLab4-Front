@@ -1,4 +1,7 @@
+import {AuthStatus} from "../auth/AuthStatus";
+
 export interface AuthRequest {
-  login: string;
+  typeOfAuth: AuthStatus;
+  username: string;
   password: string;
 }
