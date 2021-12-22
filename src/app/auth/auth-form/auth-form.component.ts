@@ -1,22 +1,14 @@
 import {AfterViewInit, Component, ViewChild, ViewEncapsulation} from '@angular/core';
-
 import {AuthStatus} from "../AuthStatus";
-
 import {AuthFormLoginComponent} from "../auth-form-login/auth-form-login.component";
-
 import {AuthFormRegisterComponent} from "../auth-form-register/auth-form-register.component";
-
 import {AuthFormButtonComponent} from "../auth-form-button/auth-form-button.component";
-
 import {AuthFormSwitcherComponent} from "../auth-form-switcher/auth-form-switcher.component";
-
 import {AuthService} from "../../services/auth.service";
-
 import {FormGroup} from "@angular/forms";
-
 import {Observer} from "rxjs";
-
 import {AuthResponse} from "../../interfaces/AuthResponse";
+import {NavigationService} from "../../services/navigation.service";
 
 @Component({
   selector: 'app-auth-form',
@@ -57,8 +49,15 @@ export class AuthFormComponent implements AfterViewInit {
 
   /* Observers(Define typical behave for submitRegister/submitLogin) */
   loginObserver: Observer<AuthResponse> = {
-    next: value => console.log(value),
-    error: err => console.log(err),
+    next: value => {
+      console.log(value);
+      this.navigationService.goToMain();
+    },
+    error: err => {
+      console.log(err);
+      //todo Убрать, это для того чтобы разрабатывать также!
+      this.navigationService.goToMain();
+    },
     complete: () => console.log("completed")
   }
 
@@ -81,7 +80,8 @@ export class AuthFormComponent implements AfterViewInit {
   }
 
   //todo Утечку памяти предотвратить
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private navigationService: NavigationService) {
   }
 
   /* Refreshing child components variables */

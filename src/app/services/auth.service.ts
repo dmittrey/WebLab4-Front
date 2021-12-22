@@ -27,9 +27,9 @@ export class AuthService {
 
   loginUser(loginData: FormGroup): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.loginUrl, this.formConverter.convertToRequest(loginData, AuthStatus.LOGIN), {observe: 'body', responseType: 'json'})
-      // .pipe(
-      //   catchError(this.errorHandler.handleError)
-      // );
+      .pipe(
+        catchError(this.errorHandler.handleError)
+      );
   }
 
   registerUser(registerData: FormGroup): Observable<AuthResponse> {
