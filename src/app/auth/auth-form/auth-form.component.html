@@ -6,7 +6,6 @@
 </div>
 
 <div class="authForm">
-    <app-auth-form-login *ngIf="isLoginStatus()"></app-auth-form-login>
-    <app-auth-form-register *ngIf="isRegisterStatus()"></app-auth-form-register>
-  <app-auth-form-button (click)="submitAuth()" ></app-auth-form-button>
+    <app-auth-form-login *ngIf="isLoginStatus()" (login)="submitLogin($event)"></app-auth-form-login>
+    <app-auth-form-register *ngIf="isRegisterStatus()" (register)="submitRegister($event)"></app-auth-form-register>
 </div>

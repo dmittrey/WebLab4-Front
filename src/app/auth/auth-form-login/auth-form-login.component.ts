@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 
 import {CustomValidators} from "../CustomValidators";
-import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-auth-form-login',
@@ -12,8 +11,10 @@ import {AuthService} from "../../services/auth.service";
 })
 export class AuthFormLoginComponent {
 
-  loginFormGroup = new FormGroup({
-    username: new FormControl('', Validators.compose([
+  @Output() login = new EventEmitter<FormGroup>();
+
+  loginFormGroup = this.fb.group({
+    username: [null, Validators.compose([
       // 1. Username field is Required
       Validators.required,
 
@@ -23,8 +24,8 @@ export class AuthFormLoginComponent {
 
       // 3. check whether the entered username has a special character
       Validators.pattern('^[a-zA-Z-0123456789]*$'),
-    ])),
-    password: new FormControl('', Validators.compose([
+    ])],
+    password: [null, Validators.compose([
       // 1. Password Field is Required
       Validators.required,
 
@@ -42,8 +43,18 @@ export class AuthFormLoginComponent {
 
       // 6. Has a minimum length of 8 characters
       Validators.minLength(8)
-    ]))
+    ])]
   });
+
+  /**
+   * Логика отправления формы
+   */
+  submit() {
+    if (this.loginFormGroup.valid) {
+      console.log(this.loginFormGroup.value);
+      this.login.emit(this.loginFormGroup);
+    }
+  }
 
   // todo Подумать когда подписать а когда отписать
 
@@ -54,4 +65,8 @@ export class AuthFormLoginComponent {
   get password() {
     return this.loginFormGroup.controls['password'];
   }
+
+  constructor(private fb: FormBuilder) {
+  }
+
 }

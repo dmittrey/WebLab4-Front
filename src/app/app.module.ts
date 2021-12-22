@@ -12,6 +12,9 @@ import {AuthFormSwitcherComponent} from './auth/auth-form-switcher/auth-form-swi
 import {ReactiveFormsModule} from '@angular/forms';
 import { AlertFieldComponent } from './alert-field/alert-field.component';
 import { HttpClientModule } from '@angular/common/http';
+import {AuthService} from "./services/auth.service";
+import {HandleErrorService} from "./services/handle.error.service";
+import {RegisterService} from "./services/register.service";
 
 
 @NgModule({
@@ -31,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, HandleErrorService, RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

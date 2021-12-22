@@ -6,6 +6,7 @@ import {AuthFormButtonComponent} from "../auth-form-button/auth-form-button.comp
 import {AuthFormSwitcherComponent} from "../auth-form-switcher/auth-form-switcher.component";
 import {AuthService} from "../../services/auth.service";
 import {RegisterService} from "../../services/register.service";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-auth-form',
@@ -33,6 +34,23 @@ export class AuthFormComponent implements AfterViewInit {
     return 0;
   }
 
+  /* Методы вызываемые из дочерних компонентов */
+  submitLogin(loginForm: FormGroup) {
+    this.authService.loginUser(loginForm).subscribe({
+      next: value => console.log(value),
+      error: err => console.log(err),
+      complete: () => console.log("completed")
+    });
+  }
+
+  submitRegister(registerForm: FormGroup) {
+    this.authService.loginUser(registerForm).subscribe({
+      next: value => console.log(value),
+      error: err => console.log(err),
+      complete: () => console.log("completed")
+    });
+  }
+
   /* Local logic */
   /**
    * Меняем состояние окна в template через ngIf!!
@@ -51,10 +69,10 @@ export class AuthFormComponent implements AfterViewInit {
   //todo Стоит подмумать как бы стандартизировать выпуск данных, либо метод конвертер либо отправлять так,
   // А на сервере парсить
   submitAuth() {
-    (this.isLoginStatus()) {
-      (this.loginComponent.loginFormGroup.valid)
-        ? this.authService.loginUser()
-    }
+    // (this.isLoginStatus()) {
+    //   (this.loginComponent.loginFormGroup.valid)
+    //     ? this.authService.loginUser()
+    // }
   }
 
   constructor(private authService: AuthService, private registerService: RegisterService) {

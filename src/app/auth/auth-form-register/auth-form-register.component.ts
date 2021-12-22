@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, Output} from '@angular/core';
+import {FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../CustomValidators";
 import {FormBuilder} from '@angular/forms';
 
@@ -10,6 +10,7 @@ import {FormBuilder} from '@angular/forms';
 })
 export class AuthFormRegisterComponent {
 
+  @Output() register = new EventEmitter<FormGroup>();
 
   loginFormGroup = this.fb.group({
     username: [null, Validators.compose([
@@ -46,6 +47,17 @@ export class AuthFormRegisterComponent {
   }, {
     validator: CustomValidators.passwordMatchValidator
   })
+
+  /**
+   * Логика отправления формы
+   */
+  submit() {
+    // Если подтвердили то прокидываем вверх
+    if (this.loginFormGroup.valid) {
+      console.log(this.loginFormGroup.value);
+      this.register.emit(this.loginFormGroup);
+    }
+  }
 
   get username() {
     return this.loginFormGroup.controls['username'];
