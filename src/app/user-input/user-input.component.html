@@ -1,0 +1,63 @@
+<section class="user_input">
+
+  <!-- Форма для отправки данных серверу с помощью метода POST -->
+  <form id="form">
+
+
+    <!-- Блок для ввода значений переменных -->
+    <div class="values">
+
+      <!-- Блок для значения Y -->
+      <div class="X_value">
+        <app-x-select></app-x-select>
+        <!-- Поле для ввода значения X -->
+        <!--        <label for="X_value"></label>-->
+        <!--        <select id="X_value">-->
+        <!--          <option>-5</option>-->
+        <!--        </select>-->
+      </div>
+
+      <!-- Блок для значения Y -->
+      <div class="Y_value">
+
+        <!-- Поле ввода значения Y -->
+        <label for="Y_value"></label>
+        <input id="Y_value"
+               maxlength="6"
+               placeholder="Заполни меня"/>
+      </div>
+
+      <!-- Блок для значения R -->
+      <div class="R_value">
+
+        <app-x-select></app-x-select>
+
+        <!-- Поле ввода значения R -->
+<!--        <label for="R_value"></label>-->
+<!--        <input id="R_value"-->
+<!--               placeholder="Заполни меня"-->
+<!--               required>-->
+      </div>
+    </div>
+
+    <!-- Отображение клиентской валидации -->
+    <div id="Error_text">
+      <span id="X_error"></span>
+      <span id="Y_error"></span>
+      <span id="R_error"></span>
+    </div>
+
+    <!-- Блок для кнопки отправки -->
+    <!--    todo Сделать обобщенный компонент для Submit кнопок-->
+    <div class="buttons">
+      <button id="submit">
+        SUBMIT
+      </button>
+    </div>
+  </form>
+</section>
+
+
+<!--todo Валидаторы-->
+
+<!--todo Алерты-->

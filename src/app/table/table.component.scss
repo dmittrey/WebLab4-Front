@@ -1,0 +1,55 @@
+.table_section {
+  position: absolute;
+  left: 100px;
+  top: 600px;
+
+  #cleaner {
+    position: relative;
+    margin: 20px;
+    left: 430px;
+
+    button {
+      color: whitesmoke;
+      background: rgba(0, 0, 0, 0.83);
+      width: 175px;
+      height: 40px;
+      border-radius: 20px 20px 20px 20px;
+      transition: 0.5s;
+    }
+
+    button:hover {
+      box-shadow: 0 0 10px 5px navajowhite;
+    }
+
+    button:active {
+      box-shadow: 0 0 10px 5px #f41c52;
+    }
+  }
+
+  #hitTable {
+    position: relative;
+    width: 1100px;
+    border: 1px solid black;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    transition: 0.5s;
+    border-radius: 20px 20px 20px 20px;
+
+    tr:first-of-type {
+      background: rgba(0, 0, 0, 0.83);
+    }
+
+    tr:nth-child(odd) {
+      background: rgb(29, 29, 29);
+    }
+
+    td, th {
+      border-radius: 20px 20px 20px 20px;
+      padding: 3px;
+    }
+  }
+
+  #hitTable:hover {
+
+    box-shadow: 0 0 40px 5px #f41c52;
+  }
+}

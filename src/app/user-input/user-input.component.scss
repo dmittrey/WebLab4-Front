@@ -1,0 +1,91 @@
+.user_input {
+
+  #form {
+    position: absolute;
+    left: 700px;
+    top: 120px;
+    width: 500px;
+    height: 400px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    background: #1d1d1d;
+    border-radius: 20px 20px 20px 20px;
+    transition: 0.5s;
+  }
+
+  #form:hover {
+    box-shadow: 0 0 40px 5px #f41c52;
+  }
+
+  .X_value {
+    margin: 16px;
+    position: relative;
+    top: 30px;
+    left: 110px;
+
+    input {
+      width: 195px;
+      border-radius: 5px 5px 5px 5px;
+    }
+  }
+
+  .Y_value {
+    margin: 16px;
+    position: relative;
+    top: 30px;
+    left: 110px;
+
+    input {
+      width: 195px;
+      border-radius: 5px 5px 5px 5px;
+    }
+  }
+
+  .R_value {
+    margin: 16px;
+    position: relative;
+    top: 30px;
+    left: 110px;
+  }
+
+  #Error_text {
+    margin: 15px;
+    position: relative;
+    top: 45px;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+
+    * {
+      border: none;
+      outline: none;
+      text-align: center;
+      background: #1d1d1d;
+      color: red;
+      font-size: 18px;
+      margin: 4px;
+      font-family: sans-serif;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    left: 37%;
+    top: 280px;
+    align-items: center;
+
+    * {
+      border-radius: 6px;
+      border-width: 2px;
+      border-style: revert;
+      border-color: whitesmoke;
+      cursor: pointer;
+      color: whitesmoke;
+      background: rgba(49, 49, 49, 0.83);
+      width: 200%;
+      height: 40px;
+      font-family: 'ZCOOL KuaiLe', 'Times New Roman', serif;
+      padding: 0;
+      font-size: 1rem;
+    }
+  }
+}
