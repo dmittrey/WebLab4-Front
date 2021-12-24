@@ -22,7 +22,7 @@
     top: 30px;
     left: 110px;
 
-    input {
+    select {
       width: 195px;
       border-radius: 5px 5px 5px 5px;
     }
@@ -35,7 +35,7 @@
     left: 110px;
 
     input {
-      width: 195px;
+      width: 190px;
       border-radius: 5px 5px 5px 5px;
     }
   }
@@ -45,6 +45,11 @@
     position: relative;
     top: 30px;
     left: 110px;
+
+    select {
+      width: 195px;
+      border-radius: 5px 5px 5px 5px;
+    }
   }
 
   #Error_text {
@@ -68,24 +73,34 @@
   }
 
   .buttons {
-    position: absolute;
+    position: relative;
     left: 37%;
-    top: 280px;
+    top: 70px;
     align-items: center;
 
     * {
       border-radius: 6px;
       border-width: 2px;
-      border-style: revert;
+      //border-style: revert;
       border-color: whitesmoke;
       cursor: pointer;
       color: whitesmoke;
       background: rgba(49, 49, 49, 0.83);
-      width: 200%;
+      width: 30%;
       height: 40px;
-      font-family: 'ZCOOL KuaiLe', 'Times New Roman', serif;
+      //font-family: 'ZCOOL KuaiLe', 'Times New Roman', serif;
       padding: 0;
-      font-size: 1rem;
+      //font-size: 1rem;
+    }
+
+    button:disabled,
+    button[disabled]{
+      border: 1px solid #999999;
+      background-color: #cccccc;
+      color: #666666;
+      cursor: not-allowed;
     }
   }
+
+
 }

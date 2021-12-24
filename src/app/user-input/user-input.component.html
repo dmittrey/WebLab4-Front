@@ -1,57 +1,70 @@
 <section class="user_input">
 
-  <!-- Форма для отправки данных серверу с помощью метода POST -->
-  <form id="form">
+  <form [formGroup]="userInput" id="form">
 
-
-    <!-- Блок для ввода значений переменных -->
-    <div class="values">
-
-      <!-- Блок для значения Y -->
-      <div class="X_value">
-        <app-x-select></app-x-select>
-        <!-- Поле для ввода значения X -->
-        <!--        <label for="X_value"></label>-->
-        <!--        <select id="X_value">-->
-        <!--          <option>-5</option>-->
-        <!--        </select>-->
-      </div>
-
-      <!-- Блок для значения Y -->
-      <div class="Y_value">
-
-        <!-- Поле ввода значения Y -->
-        <label for="Y_value"></label>
-        <input id="Y_value"
-               maxlength="6"
-               placeholder="Заполни меня"/>
-      </div>
-
-      <!-- Блок для значения R -->
-      <div class="R_value">
-
-        <app-x-select></app-x-select>
-
-        <!-- Поле ввода значения R -->
-<!--        <label for="R_value"></label>-->
-<!--        <input id="R_value"-->
-<!--               placeholder="Заполни меня"-->
-<!--               required>-->
-      </div>
+    <!--      X value-->
+    <div class="X_value">
+      <label>X value:</label>
+      <select formControlName="xSelect">
+        <option [ngValue]="null" disabled selected>Choose your profile</option>
+        <option *ngFor="let x of xSelectOptions" [ngValue]="x">
+          {{ x.value }}
+        </option>
+      </select>
     </div>
 
-    <!-- Отображение клиентской валидации -->
+    <!--    Y value-->
+    <div class="Y_value">
+      <label>Y value:</label>
+      <input formControlName="yText" required/>
+    </div>
+
+    <!--    R value-->
+    <div class="R_value">
+      <label>R value:</label>
+      <select formControlName="rSelect">-->
+        <option [ngValue]="null" disabled selected>Choose your profile</option>
+        <option *ngFor="let r of rSelectOptions" [ngValue]="r">
+          {{ r.value }}
+        </option>
+      </select>
+    </div>
+
     <div id="Error_text">
-      <span id="X_error"></span>
-      <span id="Y_error"></span>
-      <span id="R_error"></span>
+
+      <!--      /* X alerts */-->
+      <div *ngIf="xSelect.dirty || xSelect.touched">
+        <div *ngIf="xSelect.hasError('required')">
+          <app-alert-field className="requiredAlert"
+                           innerText="X coordinate is empty!"></app-alert-field>
+        </div>
+      </div>
+
+      <div *ngIf="yText.dirty || yText.touched">
+        <div *ngIf="yText.hasError('required')">
+          <app-alert-field className="requiredAlert"
+                           innerText="Y coordinate is empty!"></app-alert-field>
+        </div>
+        <div *ngIf="yText.hasError('pattern')">
+          <app-alert-field className="patternAlert"
+                           innerText="Y coordinate should be float value!"></app-alert-field>
+        </div>
+      </div>
+
+      <div *ngIf="rSelect.dirty || rSelect.touched">
+        <div *ngIf="rSelect.hasError('required')">
+          <app-alert-field className="requiredAlert"
+                           innerText="R coordinate is empty!"></app-alert-field>
+        </div>
+      </div>
     </div>
 
-    <!-- Блок для кнопки отправки -->
-    <!--    todo Сделать обобщенный компонент для Submit кнопок-->
     <div class="buttons">
-      <button id="submit">
-        SUBMIT
+      <button
+        [disabled]="this.userInput.invalid"
+        class="btn btn-default"
+        (click)="submit()">
+        Добавить
       </button>
     </div>
   </form>

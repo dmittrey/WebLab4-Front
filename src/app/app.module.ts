@@ -9,7 +9,7 @@ import {AuthFormLoginComponent} from './auth/auth-form-login/auth-form-login.com
 import {AuthFormRegisterComponent} from './auth/auth-form-register/auth-form-register.component';
 import {AuthFormButtonComponent} from './auth/auth-form-button/auth-form-button.component';
 import {AuthFormSwitcherComponent} from './auth/auth-form-switcher/auth-form-switcher.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertFieldComponent} from './alert-field/alert-field.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from "./services/auth.service";
@@ -25,9 +25,6 @@ import { SvgComponent } from './plot/svg/svg.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CommonModule } from '@angular/common';
-import { XSelectComponent } from './user-input/x-select/x-select.component';
-import { YTextComponent } from './user-input/y-text/y-text.component';
-import { RSelectComponent } from './user-input/r-select/r-select.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +42,6 @@ import { RSelectComponent } from './user-input/r-select/r-select.component';
     TableComponent,
     UserInputComponent,
     SvgComponent,
-    XSelectComponent,
-    YTextComponent,
-    RSelectComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -57,7 +50,8 @@ import { RSelectComponent } from './user-input/r-select/r-select.component';
     AppRoutingModule,
     NgSelectModule,
     NgOptionHighlightModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [
     AuthService,
