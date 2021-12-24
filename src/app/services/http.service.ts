@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
 import {AuthResponse} from "../utility/AuthResponse";
-import {catchError} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
-import {HandleErrorService} from "./handle.error.service";
 import {AuthRequest} from "../utility/AuthRequest";
 import {HitRequest} from "../utility/HitRequest";
 import {HitResponse} from "../utility/HitResponse";
@@ -16,8 +14,8 @@ export class HttpService {
   /**
    * For testing on mock server
    */
-  private authUrl = 'https://2414043a-d7b9-42fd-963b-1f15a8a04cee.mock.pstmn.io/auth';
-  private hitServeUrl = 'https://2414043a-d7b9-42fd-963b-1f15a8a04cee.mock.pstmn.io/hit';
+  private authUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/auth';
+  private hitServeUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/hit';
 
   /**
    * In real life
@@ -33,6 +31,7 @@ export class HttpService {
   }
 
   hitHttpRequest(hitRequest: HitRequest): Observable<HitResponse> {
+    console.log("In http post")
     return this.http.post<HitResponse>(this.hitServeUrl, hitRequest, {
       observe: 'body',
       responseType: 'json'

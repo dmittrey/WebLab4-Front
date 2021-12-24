@@ -21,9 +21,9 @@ export class FormConverterService {
   convertHitToRequest(hitFormGroup: FormGroup | null, typeOfService: HitServeStatus): HitRequest {
     return {
       typeOfService: typeOfService,
-      xValue: (hitFormGroup as FormGroup).value.xValue,
-      yValue: (hitFormGroup as FormGroup).value.yValue,
-      rValue: (hitFormGroup as FormGroup).value.rValue
+      xValue: (hitFormGroup as FormGroup).value.xSelect,
+      yValue: (hitFormGroup as FormGroup).value.yText,
+      rValue: (hitFormGroup as FormGroup).value.rSelect
     };
   };
 

@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormBuilder, Validators} from "@angular/forms";
+import {HitService} from "../services/hit.service";
 
 @Component({
   selector: 'app-user-input',
@@ -7,7 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   // template: '<app-test></app-test>',
   styleUrls: ['./user-input.component.scss']
 })
-export class UserInputComponent implements OnInit {
+export class UserInputComponent {
 
   userInput = this.fb.group({
     xSelect: [null, [Validators.required]],
@@ -58,16 +59,20 @@ export class UserInputComponent implements OnInit {
     return this.userInput.controls['rSelect'];
   }
 
-  constructor(
-    private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private hitService: HitService) {
   }
 
   submit() {
     console.log(this.userInput.value);
+    this.hitService.addHit(this.userInput).subscribe({
+      next: value => console.log(value)
+    })
+    // console.log(this.userInput.value);
   }
 
-
-  ngOnInit() {
-  }
+  //
+  // ngOnInit() {
+  // }
 
 }

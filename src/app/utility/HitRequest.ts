@@ -1,8 +1,9 @@
 import {HitServeStatus} from "./HitServeStatus";
+import {AbstractControl} from "@angular/forms";
 
 export interface HitRequest {
   typeOfService: HitServeStatus;
-  xValue: number;
-  yValue: number;
-  rValue: number;
+  xValue: AbstractControl;
+  yValue: string;
+  rValue: AbstractControl;
 }

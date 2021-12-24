@@ -14,10 +14,9 @@ import {HandleErrorService} from "./handle.error.service";
 export class HitService {
 
   addHit(hitData: FormGroup): Observable<HitResponse> {
+    console.log(this.formConverter.convertHitToRequest(hitData, HitServeStatus.ADD));
     return this.httpService.hitHttpRequest(
       this.formConverter.convertHitToRequest(hitData, HitServeStatus.ADD)
-    ).pipe(
-      catchError(this.errorHandler.handleHTTPError)
     );
   };
 

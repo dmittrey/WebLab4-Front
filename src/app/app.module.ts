@@ -57,10 +57,10 @@ import {HttpService} from "./services/http.service";
   ],
   providers: [
     AuthService,
+    HitService,
     HandleErrorService,
     FormConverterService,
     NavigationService,
-    HitService,
     HttpService
   ],
   bootstrap: [AppComponent]
