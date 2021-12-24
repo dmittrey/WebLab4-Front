@@ -14,6 +14,11 @@ export class NavigationService {
     this.router.navigate(['/main']);
   }
 
+  goToEntry() {
+    console.log("Go to entry!");
+    this.router.navigate(['/entry']);
+  }
+
   constructor(private route: ActivatedRoute,
               private router: Router) {
   }

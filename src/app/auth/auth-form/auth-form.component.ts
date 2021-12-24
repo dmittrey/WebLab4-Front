@@ -7,7 +7,7 @@ import {AuthFormSwitcherComponent} from "../auth-form-switcher/auth-form-switche
 import {AuthService} from "../../services/auth.service";
 import {FormGroup} from "@angular/forms";
 import {Observer} from "rxjs";
-import {AuthResponse} from "../../interfaces/AuthResponse";
+import {AuthResponse} from "../../utility/AuthResponse";
 import {NavigationService} from "../../services/navigation.service";
 
 @Component({

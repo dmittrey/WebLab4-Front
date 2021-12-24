@@ -25,6 +25,8 @@ import { SvgComponent } from './plot/svg/svg.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CommonModule } from '@angular/common';
+import {HitService} from "./services/hit.service";
+import {HttpService} from "./services/http.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { CommonModule } from '@angular/common';
     AuthService,
     HandleErrorService,
     FormConverterService,
-    NavigationService
+    NavigationService,
+    HitService,
+    HttpService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {SVG} from '@svgdotjs/svg.js'
-import {Point} from "../interfaces/Point";
-import {Coordinates} from "../interfaces/Coordinates";
+import {Point} from "../../utility/Point";
+import {Coordinates} from "../../utility/Coordinates";
 
 @Component({
   selector: 'app-svg',
