@@ -2,10 +2,10 @@
 
 <!-- Координатная плоскость с содержимым -->
 <div id="svg_plot">
-  <app-svg></app-svg>
+  <app-svg (click)="serveClick($event)"></app-svg>
 </div>
 
-<button (click)="kek()"></button>
+<button (click)="toastNotification()">Click me!</button>
 
 <!--todo Как прокидывать значение R в этот компонент? Через родительский или через сервисы?-->
 

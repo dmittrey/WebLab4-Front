@@ -35,6 +35,7 @@ export class SvgComponent implements OnInit {
   private SVG: any;
 
   constructor() {
+
   }
 
   ngOnInit() {

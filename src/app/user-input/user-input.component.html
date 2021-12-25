@@ -4,8 +4,10 @@
 
     <!--      X value-->
     <div class="X_value">
-      <label>X value:</label>
-      <select formControlName="xSelect" required>
+      <label for="X_value">X value:</label>
+      <select id="X_value"
+              formControlName="xSelect"
+              required>
         <option [ngValue]="null" disabled selected>Choose your profile</option>
         <option *ngFor="let x of xSelectOptions" [ngValue]="x">
           {{ x.value }}
@@ -15,16 +17,18 @@
 
     <!--    Y value-->
     <div class="Y_value">
-      <label>Y value:</label>
-      <input formControlName="yText"
+      <label for="Y_value">Y value:</label>
+      <input id="Y_value"
+             formControlName="yText"
              required
              pattern="^[+-]?\d+(\.\d+)?$"/>
     </div>
 
     <!--    R value-->
     <div class="R_value">
-      <label>R value:</label>
-      <select formControlName="rSelect"
+      <label for="R_value">R value:</label>
+      <select id="R_value"
+              formControlName="rSelect"
               required
               (change)="valueTransfer.switchRValue(rSelect.value.value)">
         <option [ngValue]="null" disabled selected>Choose your profile</option>
@@ -54,11 +58,11 @@
                            innerText="Y coordinate should be float value!"></app-alert-field>
         </div>
         <div *ngIf="yText.hasError('min')">
-          <app-alert-field className="patternAlert"
+          <app-alert-field className="minAlert"
                            innerText="Y coordinate should be great than -5!"></app-alert-field>
         </div>
         <div *ngIf="yText.hasError('max')">
-          <app-alert-field className="patternAlert"
+          <app-alert-field className="maxAlert"
                            innerText="Y coordinate should be less than 3!"></app-alert-field>
         </div>
       </div>
@@ -66,6 +70,10 @@
       <div *ngIf="rSelect.dirty || rSelect.touched">
         <div *ngIf="rSelect.hasError('required')">
           <app-alert-field className="requiredAlert"
+                           innerText="R coordinate is empty!"></app-alert-field>
+        </div>
+        <div *ngIf="rSelect.hasError('min')">
+          <app-alert-field className="minAlert"
                            innerText="R coordinate is empty!"></app-alert-field>
         </div>
       </div>

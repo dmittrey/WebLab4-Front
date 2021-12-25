@@ -16,18 +16,23 @@ import {AuthService} from "./services/auth.service";
 import {HandleErrorService} from "./services/handle.error.service";
 import {FormConverterService} from "./services/form.converter.service";
 import {AppRoutingModule} from './app-routing.module';
-import { MainPageComponent } from './main-page/main-page.component';
+import {MainPageComponent} from './main-page/main-page.component';
 import {NavigationService} from "./services/navigation.service";
-import { PlotComponent } from './plot/plot.component';
-import { TableComponent } from './table/table.component';
-import { UserInputComponent } from './user-input/user-input.component';
-import { SvgComponent } from './plot/svg/svg.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
-import { CommonModule } from '@angular/common';
+import {PlotComponent} from './plot/plot.component';
+import {TableComponent} from './table/table.component';
+import {UserInputComponent} from './user-input/user-input.component';
+import {SvgComponent} from './plot/svg/svg.component';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
+import {CommonModule} from '@angular/common';
 import {HitService} from "./services/hit.service";
 import {HttpService} from "./services/http.service";
 import {ValueTransferService} from "./services/value.transfer.service";
+
+import {
+  NgxAwesomePopupModule,
+  ToastNotificationConfigModule
+} from '@costlydeveloper/ngx-awesome-popup';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,7 @@ import {ValueTransferService} from "./services/value.transfer.service";
     PlotComponent,
     TableComponent,
     UserInputComponent,
-    SvgComponent,
+    SvgComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +59,11 @@ import {ValueTransferService} from "./services/value.transfer.service";
     NgSelectModule,
     NgOptionHighlightModule,
     CommonModule,
-    FormsModule
-  ],
+    FormsModule,
+    NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
+    //@ts-ignore
+    ToastNotificationConfigModule.forRoot( {globalSettings: {allowedNotificationsAtOnce: 1}})
+    ],
   providers: [
     AuthService,
     HitService,
@@ -67,5 +75,5 @@ import {ValueTransferService} from "./services/value.transfer.service";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
+export class AppModule{
 }

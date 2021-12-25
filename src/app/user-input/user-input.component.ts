@@ -14,7 +14,7 @@ export class UserInputComponent {
   userInput = this.fb.group({
     xSelect: null,
     yText: ['', CustomValidators.strictUnEquationValidator(-5, 3, {min: true}, {max: true})],
-    rSelect: null
+    rSelect: [null, CustomValidators.strictUnEquationValidator(0, 5, {min: true}, {max: true})]
   });
 
   /* Form models */
