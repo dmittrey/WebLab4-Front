@@ -1,7 +1,5 @@
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 
 //todo Можно дёргать параметры с другой странички!
 // https://angular.io/guide/router#accessing-query-parameters-and-fragments

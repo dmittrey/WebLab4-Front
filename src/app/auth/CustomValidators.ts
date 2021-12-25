@@ -17,6 +17,21 @@ export class CustomValidators {
     };
   }
 
+  static strictUnEquationValidator(minValue: number, maxValue:number, minError:ValidationErrors, maxError:ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [p: string]: any } | null => {
+      if (!control.value) {
+        // if control is empty return no error
+        return null;
+      }
+
+      return minValue >= control.value
+        ? minError
+        : maxValue <= control.value
+          ? maxError
+          : null;
+    };
+  }
+
   static passwordMatchValidator(control: AbstractControl) {
     const password: string = control.get('password')?.value; // get password from our password form control
     const confirmPassword: string = control.get('confirmPassword')?.value; // get password from our confirmPassword form control

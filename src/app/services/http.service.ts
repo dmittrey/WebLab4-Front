@@ -5,6 +5,8 @@ import {AuthRequest} from "../utility/AuthRequest";
 import {HitRequest} from "../utility/HitRequest";
 import {HitResponse} from "../utility/HitResponse";
 import {Observable} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {HandleErrorService} from "./handle.error.service";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,9 @@ export class HttpService {
     return this.http.post<AuthResponse>(this.authUrl, authRequest, {
       observe: 'body',
       responseType: 'json'
-    })
+    }).pipe(
+      catchError(this.errorHandler.handleHTTPError)
+    );
   }
 
   hitHttpRequest(hitRequest: HitRequest): Observable<HitResponse> {
@@ -35,9 +39,12 @@ export class HttpService {
     return this.http.post<HitResponse>(this.hitServeUrl, hitRequest, {
       observe: 'body',
       responseType: 'json'
-    })
+    }).pipe(
+      catchError(this.errorHandler.handleHTTPError)
+    );
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private errorHandler: HandleErrorService) {
   }
 }

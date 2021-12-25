@@ -26,12 +26,4 @@ export class FormConverterService {
       rValue: (hitFormGroup as FormGroup).value.rSelect
     };
   };
-
-  // convertHitServiceToRequest(typeOfService: HitServeStatus): HitRequest {
-  //   return {
-  //     typeOfService: typeOfService,
-  //     xValue: null,
-  //     yVa
-  //   }
-  // }
 }

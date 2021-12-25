@@ -5,7 +5,7 @@
     <!--      X value-->
     <div class="X_value">
       <label>X value:</label>
-      <select formControlName="xSelect">
+      <select formControlName="xSelect" required>
         <option [ngValue]="null" disabled selected>Choose your profile</option>
         <option *ngFor="let x of xSelectOptions" [ngValue]="x">
           {{ x.value }}
@@ -16,13 +16,15 @@
     <!--    Y value-->
     <div class="Y_value">
       <label>Y value:</label>
-      <input formControlName="yText" required/>
+      <input formControlName="yText"
+             required
+             pattern="^[+-]?\d+(\.\d+)?$"/>
     </div>
 
     <!--    R value-->
     <div class="R_value">
       <label>R value:</label>
-      <select formControlName="rSelect">-->
+      <select formControlName="rSelect" required>-->
         <option [ngValue]="null" disabled selected>Choose your profile</option>
         <option *ngFor="let r of rSelectOptions" [ngValue]="r">
           {{ r.value }}
@@ -49,6 +51,14 @@
           <app-alert-field className="patternAlert"
                            innerText="Y coordinate should be float value!"></app-alert-field>
         </div>
+        <div *ngIf="yText.hasError('min')">
+          <app-alert-field className="patternAlert"
+                           innerText="Y coordinate should be great than -5!"></app-alert-field>
+        </div>
+        <div *ngIf="yText.hasError('max')">
+          <app-alert-field className="patternAlert"
+                           innerText="Y coordinate should be less than 3!"></app-alert-field>
+        </div>
       </div>
 
       <div *ngIf="rSelect.dirty || rSelect.touched">
@@ -69,8 +79,3 @@
     </div>
   </form>
 </section>
-
-
-<!--todo Валидаторы-->
-
-<!--todo Алерты-->

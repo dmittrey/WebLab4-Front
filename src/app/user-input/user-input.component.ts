@@ -1,25 +1,19 @@
 import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {HitService} from "../services/hit.service";
+import {CustomValidators} from "../auth/CustomValidators";
 
 @Component({
   selector: 'app-user-input',
   templateUrl: './user-input.component.html',
-  // template: '<app-test></app-test>',
   styleUrls: ['./user-input.component.scss']
 })
 export class UserInputComponent {
 
   userInput = this.fb.group({
-    xSelect: [null, [Validators.required]],
-    yText: ['', [Validators.compose([
-      // 1. Username field is Required
-      Validators.required,
-
-      // 2. check whether the entered username has a special character
-      Validators.pattern(/^[+-]?\d+(\.\d+)?$/),
-    ])]],
-    rSelect: [null, [Validators.required]]
+    xSelect: null,
+    yText: ['', CustomValidators.strictUnEquationValidator(-5, 3, {min: true}, {max: true})],
+    rSelect: null
   });
 
   /* Form models */
@@ -64,15 +58,9 @@ export class UserInputComponent {
   }
 
   submit() {
-    console.log(this.userInput.value);
     this.hitService.addHit(this.userInput).subscribe({
-      next: value => console.log(value)
+      //todo Обработать по бизнес логике ответ http
     })
-    // console.log(this.userInput.value);
   }
-
-  //
-  // ngOnInit() {
-  // }
 
 }
