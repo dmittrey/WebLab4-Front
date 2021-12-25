@@ -27,6 +27,7 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CommonModule } from '@angular/common';
 import {HitService} from "./services/hit.service";
 import {HttpService} from "./services/http.service";
+import {ValueTransferService} from "./services/value.transfer.service";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {HttpService} from "./services/http.service";
     HandleErrorService,
     FormConverterService,
     NavigationService,
-    HttpService
+    HttpService,
+    ValueTransferService
   ],
   bootstrap: [AppComponent]
 })

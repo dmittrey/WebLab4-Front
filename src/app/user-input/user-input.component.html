@@ -24,7 +24,9 @@
     <!--    R value-->
     <div class="R_value">
       <label>R value:</label>
-      <select formControlName="rSelect" required>-->
+      <select formControlName="rSelect"
+              required
+              (change)="valueTransfer.switchRValue(rSelect.value.value)">
         <option [ngValue]="null" disabled selected>Choose your profile</option>
         <option *ngFor="let r of rSelectOptions" [ngValue]="r">
           {{ r.value }}

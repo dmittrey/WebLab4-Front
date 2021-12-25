@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import {SVG} from '@svgdotjs/svg.js'
+import {SVG} from '@svgdotjs/svg.js';
+import * as $ from 'jquery';
+
 import {Point} from "../../utility/Point";
 import {Coordinates} from "../../utility/Coordinates";
 
 @Component({
   selector: 'app-svg',
-  // templateUrl: './svg.component.html',
-  template: '<div id="plot" (click)="clickPointEvent($event)"></div>',
+  templateUrl: './svg.component.html',
   styleUrls: ['./svg.component.scss']
 })
 export class SvgComponent implements OnInit {
@@ -34,7 +35,6 @@ export class SvgComponent implements OnInit {
   private SVG: any;
 
   constructor() {
-
   }
 
   ngOnInit() {
@@ -78,21 +78,21 @@ export class SvgComponent implements OnInit {
   }
 
   /* Конвертация из координат в значения */
-  convertToCoordinateX(xCoordinate: number) {
-    return (this.WIDTH / 2) + xCoordinate / (2 * this.scale);
+  convertToCoordinateX(xValue: number) {
+    return (this.WIDTH / 2) + xValue / (2 * this.scale);
   }
 
-  convertToCoordinateY(yCoordinate: number) {
-    return (this.HEIGHT / 2) - yCoordinate / (2 * this.scale);
+  convertToCoordinateY(yValue: number) {
+    return (this.HEIGHT / 2) - yValue / (2 * this.scale);
   }
 
   /* Конвертация из значений в координаты */
-  convertToValueX(xValue: number) {
-    return (xValue - (this.WIDTH / 2)) * 2 * this.scale;
+  convertToValueX(xCoordinate: number) {
+    return (xCoordinate - (this.WIDTH / 2)) * 2 * this.scale;
   }
 
-  convertToValueY(yValue: number) {
-    return ((this.HEIGHT / 2) - yValue) * 2 * this.scale;
+  convertToValueY(yCoordinate: number) {
+    return ((this.HEIGHT / 2) - yCoordinate) * 2 * this.scale;
   }
 
   /* Утилитарные методы для построения плоскости */
@@ -218,28 +218,27 @@ export class SvgComponent implements OnInit {
 
     console.log("Click working at coordinates: " + coordinates.xValue + ", " + coordinates.yValue + ", " + coordinates.rValue);
 
-    this.drawPoint(coordinates.xValue, coordinates.yValue, true, 3);
+    this.drawPoint(coordinates.xValue, coordinates.yValue, true, this.DEFAULT_R);
     // (validateR(coordinates.r)) ? sendGraphRequest(coordinates) : injectRAlert(coordinates.r);
   }
 
   getCoords(event: MouseEvent): Coordinates {
+    const rect = $('#plot').offset();
     return {
-      xValue: this.convertToValueX(event.pageX - 99.5),
-      yValue: this.convertToValueY(event.pageX - 175),
-      rValue: 3
-      // rValue: $("#R_value").val()
+      // @ts-ignore
+      xValue: this.convertToValueX(event.pageX - rect?.left),
+      // @ts-ignore
+      yValue: this.convertToValueY(event.pageY - rect?.top),
+      rValue: this.DEFAULT_R
     }
   }
 
-  switchRadius(coordinates: Coordinates): void {
-    console.log("Radius switched to: " + coordinates.rValue);
+  switchRadius(rValue: number): void {
+    console.log("Radius switched to: " + rValue);
+    this.DEFAULT_R = Math.abs(rValue);
+    $('#plot').empty();
+    this.drawPlot();
 
-    //todo Переделать логику
-    if (typeof coordinates.rValue === 'number') {
-      this.DEFAULT_R = coordinates.rValue;
-      $('#plot').empty();
-      this.drawPlot();
-    }
   }
 
   addPoint = (xValue: number, yValue: number, rValue: number, hitResult: boolean) => {

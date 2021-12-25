@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {HitService} from "../services/hit.service";
 import {CustomValidators} from "../auth/CustomValidators";
+import {ValueTransferService} from "../services/value.transfer.service";
 
 @Component({
   selector: 'app-user-input',
@@ -54,7 +55,8 @@ export class UserInputComponent {
   }
 
   constructor(private fb: FormBuilder,
-              private hitService: HitService) {
+              private hitService: HitService,
+              public valueTransfer: ValueTransferService) {
   }
 
   submit() {

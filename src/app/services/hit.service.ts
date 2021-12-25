@@ -6,6 +6,9 @@ import {HttpService} from "./http.service";
 import {HitServeStatus} from "../utility/HitServeStatus";
 import {HitResponse} from "../utility/HitResponse";
 
+//todo Вот именно в этом сервисе крайне важно работать с одним и тем же Observable объектом
+// чтобы было проще консьюмить и при подписке обновлять несколько компонентов
+
 @Injectable({
   providedIn: 'root'
 })
