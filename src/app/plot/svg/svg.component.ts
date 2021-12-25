@@ -72,7 +72,7 @@ export class SvgComponent implements OnInit {
     this.drawAxes();
     this.drawAxesScaleLabels(this.DEFAULT_R);
     attemptsArray.forEach(
-      point => this.drawPoint(point.x, point.y, point.result, this.DEFAULT_R)
+      point => this.drawPoint(point)
     );
     this.drawRValue(this.DEFAULT_R);
   }
@@ -207,10 +207,14 @@ export class SvgComponent implements OnInit {
       .fill(this.TRIANGLE_COLOR);
   }
 
-  drawPoint = (xCoordinate: number, yCoordinate: number, result: boolean, radius: number) => {
-    let color = (result) ? '#0f0' : '#f00';
+  drawPoint = (point: Point) => {
+    let color = (point.hitResult) ? '#0f0' : '#f00';
 
-    this.SVG.circle(radius * 2).fill(color).x(this.convertToCoordinateX(xCoordinate) - radius).y(this.convertToCoordinateY(yCoordinate) - radius);
+    // @ts-ignore
+    this.SVG.circle(point.coordinates.rValue * 2)
+      .fill(color)
+      .x(this.convertToCoordinateX(point.coordinates.xValue) - point.coordinates.rValue)
+      .y(this.convertToCoordinateY(point.coordinates.yValue) - point.coordinates.rValue);
   }
 
   clickPointEvent(event: MouseEvent): void {
@@ -218,7 +222,11 @@ export class SvgComponent implements OnInit {
 
     console.log("Click working at coordinates: " + coordinates.xValue + ", " + coordinates.yValue + ", " + coordinates.rValue);
 
-    this.drawPoint(coordinates.xValue, coordinates.yValue, true, this.DEFAULT_R);
+    this.drawPoint({
+      hitResult: true,
+      coordinates: coordinates
+    });
+    this.addPoint(coordinates.xValue, coordinates.yValue, coordinates.rValue, true);
     // (validateR(coordinates.r)) ? sendGraphRequest(coordinates) : injectRAlert(coordinates.r);
   }
 
@@ -235,6 +243,7 @@ export class SvgComponent implements OnInit {
 
   switchRadius(rValue: number): void {
     console.log("Radius switched to: " + rValue);
+    //todo Подумать что делать с лейблом(отрицательный или нет?)
     this.DEFAULT_R = Math.abs(rValue);
     $('#plot').empty();
     this.drawPlot();
@@ -251,6 +260,8 @@ export class SvgComponent implements OnInit {
       hitResult: hitResult
     }
     this.attemptsArray.push(point);
+
+    this.attemptsArray.forEach(ke => console.log(ke));
   }
 
   resetDots(newAttemptsArray: Point[]) {
