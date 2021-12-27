@@ -62,8 +62,8 @@ import {
     FormsModule,
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     //@ts-ignore
-    ToastNotificationConfigModule.forRoot( {globalSettings: {allowedNotificationsAtOnce: 1}})
-    ],
+    ToastNotificationConfigModule.forRoot({globalSettings: {allowedNotificationsAtOnce: 1}})
+  ],
   providers: [
     AuthService,
     HitService,
@@ -75,5 +75,5 @@ import {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule{
+export class AppModule {
 }

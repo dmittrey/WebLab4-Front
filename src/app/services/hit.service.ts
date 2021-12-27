@@ -1,39 +1,50 @@
 import {Injectable} from "@angular/core";
-import {FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
-import {FormConverterService} from "./form.converter.service";
+import {Subject} from "rxjs";
 import {HttpService} from "./http.service";
 import {HitServeStatus} from "../utility/HitServeStatus";
 import {HitResponse} from "../utility/HitResponse";
+import {HitRequest} from "../utility/HitRequest";
 
-//todo Вот именно в этом сервисе крайне важно работать с одним и тем же Observable объектом
-// чтобы было проще консьюмить и при подписке обновлять несколько компонентов
 
+/**
+ * При использовании данного сервиса необходимо подписаться на обновления этого Observable
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class HitService {
 
-  addHit(hitData: FormGroup): Observable<HitResponse> {
-    console.log(this.formConverter.convertHitToRequest(hitData, HitServeStatus.ADD));
-    return this.httpService.hitHttpRequest(
-      this.formConverter.convertHitToRequest(hitData, HitServeStatus.ADD)
-    );
+  private hitRequestStatusStorage = new Subject<HitResponse>();
+
+  /**
+   * При использовании данного сервиса необходимо подписаться на обновления этого Observable
+   */
+  hitRequestStatus$ = this.hitRequestStatusStorage.asObservable();
+
+  addHit(hitData: HitRequest): void {
+    console.log("Adding hit: " + hitData);
+    // Получим в callback ответ от сервера и затем поместим его в хранилище чтобы оповестить всех
+    this.httpService.hitHttpRequest(hitData).subscribe({
+      next: value => this.hitRequestStatusStorage.next(value)
+    })
   };
 
-  removeAllHits(): Observable<HitResponse> {
-    return this.httpService.hitHttpRequest(
-      this.formConverter.convertHitToRequest(null, HitServeStatus.REMOVE_ALL)
-    );
+  removeAllHits(): void {
+    console.log("Removing all hits from server!");
+
+    this.httpService.hitHttpRequest({typeOfService: HitServeStatus.REMOVE_ALL}).subscribe({
+      next: value => this.hitRequestStatusStorage.next(value)
+    })
   };
 
-  getAllHits(): Observable<HitResponse> {
-    return this.httpService.hitHttpRequest(
-      this.formConverter.convertHitToRequest(null, HitServeStatus.GET_ALL)
-    );
+  getAllHits(): void {
+    console.log("Getting all hits from server!");
+
+    this.httpService.hitHttpRequest({typeOfService: HitServeStatus.GET_ALL}).subscribe({
+      next: value => this.hitRequestStatusStorage.next(value)
+    })
   };
 
-  constructor(private httpService: HttpService,
-              private formConverter: FormConverterService) {
+  constructor(private httpService: HttpService) {
   }
 }

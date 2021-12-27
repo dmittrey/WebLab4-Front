@@ -35,7 +35,6 @@ export class HttpService {
   }
 
   hitHttpRequest(hitRequest: HitRequest): Observable<HitResponse> {
-    console.log("In http post")
     return this.http.post<HitResponse>(this.hitServeUrl, hitRequest, {
       observe: 'body',
       responseType: 'json'

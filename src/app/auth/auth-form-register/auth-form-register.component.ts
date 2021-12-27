@@ -1,15 +1,14 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
 
-import {FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import {CustomValidators} from "../CustomValidators";
-
-import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-auth-form-register',
   templateUrl: './auth-form-register.component.html',
-  styleUrls: ['./auth-form-register.component.scss']
+  styleUrls: ['./auth-form-register.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AuthFormRegisterComponent {
 

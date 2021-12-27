@@ -1,4 +1,4 @@
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Injectable} from "@angular/core";
 
 //todo Можно дёргать параметры с другой странички!
@@ -17,7 +17,6 @@ export class NavigationService {
     this.router.navigate(['/entry']);
   }
 
-  constructor(private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private router: Router) {
   }
 }

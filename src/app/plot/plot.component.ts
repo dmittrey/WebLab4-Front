@@ -5,10 +5,15 @@ import {SvgComponent} from "./svg/svg.component";
 
 import {
   AppearanceAnimation,
-  DialogLayoutDisplay, DisappearanceAnimation,
+  DialogLayoutDisplay,
+  DisappearanceAnimation,
   ToastNotificationInitializer,
-  ToastPositionEnum, ToastProgressBarEnum, ToastUserViewTypeEnum
+  ToastPositionEnum,
+  ToastProgressBarEnum,
+  ToastUserViewTypeEnum
 } from "@costlydeveloper/ngx-awesome-popup";
+import {HitService} from "../services/hit.service";
+import {HitServeStatus} from "../utility/HitServeStatus";
 
 @Component({
   selector: 'app-plot',
@@ -46,24 +51,35 @@ export class PlotComponent implements OnDestroy, OnInit {
     if (this.rValue == undefined) {
       this.toastNotification();
     } else {
-      this.SvgComponent.clickPointEvent(event);
+      let clickCoordinates = this.SvgComponent.clickPointEvent(event);
+      this.hitService.addHit({
+        typeOfService: HitServeStatus.ADD,
+        xValue: clickCoordinates.xValue.toString(),
+        yValue: clickCoordinates.yValue.toString(),
+        rValue: clickCoordinates.rValue.toString()
+      });
     }
   }
-
-  //todo Нужно сделать еще
 
   switchSvgRadius(rValue: number) {
     this.SvgComponent.switchRadius(rValue);
   }
 
-  subscription!: Subscription;
+  rValueSubscription!: Subscription;
+  hitServiceSubscription!: Subscription;
 
   //and add a line in constructor to get services instance
-  constructor(private valueTransfer: ValueTransferService) {
+  constructor(private valueTransfer: ValueTransferService,
+              private hitService: HitService) {
   }
 
   ngOnInit() {
-    this.subscription = this.valueTransfer.rValue$.subscribe({
+    this.hitServiceSubscription = this.hitService.hitRequestStatus$.subscribe({
+      next: value => {
+        console.log("Hit service status updated: " + value);
+      }
+    })
+    this.rValueSubscription = this.valueTransfer.rValue$.subscribe({
       next: rValue => {
         this.switchSvgRadius(rValue);
         this.rValue = rValue;
@@ -71,14 +87,15 @@ export class PlotComponent implements OnDestroy, OnInit {
     });
   }
 
-  //Чтобы не было утечки памяти
+  // Чтобы не было утечки памяти
   ngOnDestroy() {
     // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+    this.rValueSubscription.unsubscribe();
+    this.hitServiceSubscription.unsubscribe();
     this.SvgComponent.cleanPlot();
   }
 
-  // Create the method
+  // https://costlydeveloper.github.io/ngx-awesome-popup/#/playground/toast-generator
   toastNotification() {
     const newToastNotification = new ToastNotificationInitializer();
 

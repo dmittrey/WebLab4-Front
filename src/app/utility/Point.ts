@@ -1,6 +1,8 @@
 import {Coordinates} from "./Coordinates";
 
 export interface Point {
+  hitResult: boolean,
   coordinates: Coordinates,
-  hitResult: boolean
+  currentTime?: string,
+  executionTime?: string
 }

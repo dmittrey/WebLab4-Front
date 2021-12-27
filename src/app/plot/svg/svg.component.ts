@@ -218,17 +218,19 @@ export class SvgComponent implements OnInit {
       .y(this.convertToCoordinateY(point.coordinates.yValue) - point.coordinates.rValue);
   }
 
-  clickPointEvent(event: MouseEvent): void {
+  clickPointEvent(event: MouseEvent): Coordinates {
     let coordinates = this.getCoords(event);
 
     console.log("Click working at coordinates: " + coordinates.xValue + ", " + coordinates.yValue + ", " + coordinates.rValue);
 
+    //todo Перенести на постобработку ответа от бэка
     this.drawPoint({
       hitResult: true,
       coordinates: coordinates
     });
     this.addPoint(coordinates.xValue, coordinates.yValue, coordinates.rValue, true);
     // (validateR(coordinates.r)) ? sendGraphRequest(coordinates) : injectRAlert(coordinates.r);
+    return coordinates;
   }
 
   getCoords(event: MouseEvent): Coordinates {
@@ -261,8 +263,6 @@ export class SvgComponent implements OnInit {
       hitResult: hitResult
     }
     this.attemptsArray.push(point);
-
-    this.attemptsArray.forEach(ke => console.log(ke));
   }
 
   resetDots(newAttemptsArray: Point[]) {

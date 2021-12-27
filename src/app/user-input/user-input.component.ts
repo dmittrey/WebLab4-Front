@@ -1,15 +1,19 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder} from "@angular/forms";
 import {HitService} from "../services/hit.service";
 import {CustomValidators} from "../auth/CustomValidators";
 import {ValueTransferService} from "../services/value.transfer.service";
+import {HitServeStatus} from "../utility/HitServeStatus";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-input',
   templateUrl: './user-input.component.html',
   styleUrls: ['./user-input.component.scss']
 })
-export class UserInputComponent {
+export class UserInputComponent implements OnInit, OnDestroy{
+
+  hitServiceSubscription!: Subscription;
 
   userInput = this.fb.group({
     xSelect: null,
@@ -60,7 +64,27 @@ export class UserInputComponent {
   }
 
   submit() {
-    this.hitService.addHit(this.userInput).subscribe({
+
+    console.log(this.xSelect.value.value.toString());
+    console.log(this.yText.value);
+    console.log(this.rSelect.value.value.toString());
+
+    this.hitService.addHit({
+      typeOfService: HitServeStatus.ADD,
+      xValue: this.xSelect.value.value.toString(),
+      yValue: this.yText.value,
+      rValue: this.rSelect.value.value.toString()
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.hitServiceSubscription.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.hitService.hitRequestStatus$.subscribe({
+      next: value => console.log("Success: " + value),
+      error: err => console.log("Bad: " + err)
       //todo Обработать по бизнес логике ответ http
     })
   }

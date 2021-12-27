@@ -1,7 +1,13 @@
 <form [formGroup]="loginFormGroup">
 
   <label for="username">Username:</label>
-  <input type="text" placeholder="Username" id="username" formControlName="username">
+  <input type="text"
+         placeholder="Username"
+         id="username"
+         formControlName="username"
+         required
+         [minlength]="3"
+         [maxLength]="30">
 
   <div *ngIf="username.dirty
           || username.touched" id="usernameAlerts">
@@ -21,16 +27,27 @@
     </div>
 
     <!--    3. check whether the entered username has a special character-->
-    <div *ngIf="username.hasError('pattern')">
+<!--    <div *ngIf="username.hasError('pattern')">-->
+<!--      <app-alert-field className="patternAlert"-->
+<!--                       innerText="Username has should have only symbols [^[a-zA-Z-0123456789]*$]!"></app-alert-field>-->
+<!--    </div>-->
+
+    <div *ngIf="username.hasError('whitespace')">
       <app-alert-field className="patternAlert"
-                       innerText="Username has should have only symbols [^[a-zA-Z-0123456789]*$]!"></app-alert-field>
+                       innerText="Username has should have only symbolsawdawdawdawdwad [^[a-zA-Z-0123456789]*$]!"></app-alert-field>
     </div>
 
   </div>
 
   <label for="password">Password:</label>
-  <input type="password" placeholder="Password" id="password" formControlName="password">
+  <input type="password"
+         placeholder="Password"
+         id="password"
+         formControlName="password"
+         required
+         minlength="8">
 
+</form>
   <div *ngIf="password.dirty
           || password.touched" id="passwordAlerts">
 
@@ -61,17 +78,17 @@
     <!--    5. check whether the entered password has a special character-->
     <div *ngIf="password.hasError('hasSpecialCharacters')">
       <app-alert-field className="hasSpecialCharactersAlert"
-                       innerText="Password should have a special characters: [!@#$%^&*()_+-=[]{};':|,.<>\/?]"></app-alert-field>
+                       innerText="Password should have one of a special characters: [!@#$%^&*()_+-=[]{};':|,.<>\/?]"></app-alert-field>
     </div>
 
     <!--    6. Has a minimum length of 8 characters-->
     <div *ngIf="password.hasError('minlength')">
       <app-alert-field className="minlengthAlert"
-                       innerText="Password should have more 3 and less 30 symbols!"></app-alert-field>
+                       innerText="Password should have more 8 symbols!"></app-alert-field>
     </div>
 
   </div>
 
   <app-auth-form-button (click)="submit()"></app-auth-form-button>
 
-</form>
+<!--</form>-->

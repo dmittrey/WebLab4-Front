@@ -1,48 +1,34 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
 
-import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {CustomValidators} from "../CustomValidators";
 
 @Component({
   selector: 'app-auth-form-login',
   templateUrl: './auth-form-login.component.html',
-  styleUrls: ['./auth-form-login.component.scss']
+  styleUrls: ['./auth-form-login.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AuthFormLoginComponent {
 
   @Output() login = new EventEmitter<FormGroup>();
 
   loginFormGroup = this.fb.group({
-    username: [null, Validators.compose([
-      // 1. Username field is Required
-      Validators.required,
-
-      // 2. check length of username
-      Validators.minLength(3),
-      Validators.maxLength(30),
-
-      // 3. check whether the entered username has a special character
-      Validators.pattern('^[a-zA-Z-0123456789]*$'),
-    ])],
+    username: null,
     password: [null, Validators.compose([
-      // 1. Password Field is Required
-      Validators.required,
 
-      // 2. check whether the entered password has a number
+      // 1. check whether the entered password has a number
       CustomValidators.patternValidator(/\d/, {hasNumber: true}),
 
-      // 3. check whether the entered password has upper case letter
+      // 2. check whether the entered password has upper case letter
       CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
 
-      // 4. check whether the entered password has a lower-case letter
+      // 3. check whether the entered password has a lower-case letter
       CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
 
-      // 5. check whether the entered password has a special character
+      // 4. check whether the entered password has a special character
       CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/, {hasSpecialCharacters: true}),
-
-      // 6. Has a minimum length of 8 characters
-      Validators.minLength(8)
     ])]
   });
 
