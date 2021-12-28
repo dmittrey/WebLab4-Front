@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+import {delay, Observable, tap} from "rxjs";
 import {AuthResponse} from "../utility/AuthResponse";
 import {FormGroup} from "@angular/forms";
 import {FormConverterService} from "./form.converter.service";
@@ -11,9 +11,19 @@ import {HttpService} from "./http.service";
 })
 export class AuthService {
 
+  isLoggedIn: boolean;
+
+  constructor(private httpService: HttpService,
+              private formConverter: FormConverterService) {
+    this.isLoggedIn = false;
+  }
+
   loginUser(loginData: FormGroup): Observable<AuthResponse> {
     return this.httpService.authHttpRequest(
       this.formConverter.convertAuthToRequest(loginData, AuthStatus.LOGIN)
+    ).pipe(
+      delay(3000),
+      tap(() => this.isLoggedIn = true)
     );
   };
 
@@ -23,7 +33,7 @@ export class AuthService {
     );
   };
 
-  constructor(private httpService: HttpService,
-              private formConverter: FormConverterService) {
+  logout(): void {
+    this.isLoggedIn = false;
   }
 }

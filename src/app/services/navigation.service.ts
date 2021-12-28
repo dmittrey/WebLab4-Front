@@ -7,6 +7,9 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class NavigationService {
 
+  //todo CanDeactivate to mediate navigation away from the current route.
+  // Через это буду отрезать токен
+
   goToMain() {
     console.log("Go to main!");
     this.router.navigate(['/main']);
