@@ -1,6 +1,6 @@
 <form [formGroup]="loginFormGroup">
 
-  <label for="username">Username:</label>
+  <label class="field" for="username">Username:</label>
   <input type="text"
          placeholder="Username"
          id="username"
@@ -39,7 +39,7 @@
 
   </div>
 
-  <label for="password">Password:</label>
+  <label class="field" for="password">Password:</label>
   <input type="password"
          placeholder="Password"
          id="password"
@@ -47,7 +47,6 @@
          required
          minlength="8">
 
-</form>
   <div *ngIf="password.dirty
           || password.touched" id="passwordAlerts">
 
@@ -89,6 +88,6 @@
 
   </div>
 
-  <app-auth-form-button (click)="submit()"></app-auth-form-button>
+  <app-auth-form-button (click)="submit()" class="double-border-button"></app-auth-form-button>
 
-<!--</form>-->
+</form>
