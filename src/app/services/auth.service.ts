@@ -15,15 +15,18 @@ export class AuthService {
 
   constructor(private httpService: HttpService,
               private formConverter: FormConverterService) {
-    this.isLoggedIn = false;
+    this.isLoggedIn = localStorage.getItem("isLoggedIn") != null;
   }
 
   loginUser(loginData: FormGroup): Observable<AuthResponse> {
     return this.httpService.authHttpRequest(
       this.formConverter.convertAuthToRequest(loginData, AuthStatus.LOGIN)
     ).pipe(
-      delay(3000),
-      tap(() => this.isLoggedIn = true)
+      delay(3000),//todo Нужно ли ждать 3 секунды ответа?
+      tap(() => {
+        this.isLoggedIn = true;
+        localStorage.setItem("isLoggedIn", "Privet");
+      }) // Держать в куки
     );
   };
 
@@ -35,5 +38,6 @@ export class AuthService {
 
   logout(): void {
     this.isLoggedIn = false;
+    localStorage.removeItem("isLoggedIn");
   }
 }

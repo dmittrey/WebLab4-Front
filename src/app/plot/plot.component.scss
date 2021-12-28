@@ -1,58 +1,36 @@
+@function toVh($value) {
+  @return $value / 100vw * 100vh;
+}
+
+$width: 100vw;
+$height: toVh(95vw);
+
+$plot-width: 5 * $width/15;
+
+$user-input-width: 5 * $width/15;
+
+$box-shadow-unit: 0.01 * $plot-width; // 5px
+
+$plot-left-offset: $width/15;
+$plot-top-offset: 2 * $height/15;
+
+$user-input-left-offset: 9 * $width/15;
+$user-input-top-offset: 2 * $height/15;
+
+$table-left-offset: $width/15;
+
+// 1/15 | 5/15 | 3/15 | 5/15 | 1/15
+
 #svg_plot {
-  position: absolute;
-  left: 100px;
-  top: 120px;
-  width: 400px;
-  height: 400px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  width: $plot-width;
+  height: $plot-width;
+  box-shadow: 0 0 $box-shadow-unit*2 $box-shadow-unit rgba(221, 221, 221, 1);
   background: #1d1d1d;
-  border-radius: 20px 20px 20px 20px;
+  border-radius: $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4;
   transition: 0.5s;
-  //
-  //* {
-  //  transition: 0.5s;
-  //}
 }
 
 #svg_plot:hover {
-  box-shadow: 0 0 40px 5px #f41c52;
+  box-shadow: 0 0 $box-shadow-unit * 8 $box-shadow-unit #f41c52;
 }
-//
-//#plotInput {
-//  display: none;
-//}
 
-//https://openbase.com/js/angular-notifier
-.notifier {
-  &__container {
-    * {
-      box-sizing: border-box;
-    }
-
-    &-list {
-      margin: {
-        top: 0;
-        bottom: 0;
-      }
-      padding: {
-        left: 0;
-      }
-      list-style-type: none;
-    }
-  }
-
-  &__notification {
-    display: flex;
-    align-items: center;
-    position: fixed; // Overlay
-    visibility: hidden; // Notifications are hidden by default, and get shown (or animated in) dynamically by the Angular component
-    z-index: 10000; // Pretty much random ...
-
-    // This attribute forces this element to be rendered on a new layer, by the GPU, in order to improve its performance (#perfmatters)
-    will-change: transform;
-
-    // This attribute improves the overall scrolling performance for fixed position elements, such as this one (#perfmatters)
-    // See <https://benfrain.com/improving-css-performance-fixed-position-elements/>
-    backface-visibility: hidden;
-  }
-}

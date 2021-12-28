@@ -1,82 +1,96 @@
+@function toVh($value) {
+  @return $value / 100vw * 100vh;
+}
+
+$width: 100vw;
+$height: toVh(95vw);
+
+$plot-width: 5 * $width/15;
+
+$user-input-width: 5 * $width/15;
+
+$box-shadow-unit: 0.01 * $plot-width; // 5px
+
+$plot-left-offset: $width/15;
+$plot-top-offset: 2 * $height/15;
+
+$user-input-left-offset: 9 * $width/15;
+$user-input-top-offset: 2 * $height/15;
+
+$table-left-offset: $width/15;
+
+$label-top-offset: 1;
+$label-left-offset: 0.1 * $user-input-width;
+
+$input-width: 0.7 * $user-input-width;
+$input-height: 0.1 * $user-input-width;
+
+
+// 1/15 | 5/15 | 3/15 | 5/15 | 1/15
+
 .user_input {
 
   #form {
-    position: absolute;
-    left: 700px;
-    top: 120px;
-    width: 500px;
-    height: 400px;
-    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    width: $user-input-width;
+    min-height: $user-input-width;
+    box-shadow: 0 0 $box-shadow-unit*2 $box-shadow-unit rgba(221, 221, 221, 1);
     background: #1d1d1d;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4;
     transition: 0.5s;
   }
 
   #form:hover {
-    box-shadow: 0 0 40px 5px #f41c52;
+    box-shadow: 0 0 $box-shadow-unit * 8 $box-shadow-unit #f41c52;
   }
 
-  .X_value {
-    margin: 16px;
-    position: relative;
-    top: 30px;
-    left: 110px;
+  .values {
 
-    select {
-      width: 195px;
-      border-radius: 5px 5px 5px 5px;
-    }
-  }
+    * {
+      position: relative;
+      left: $label-left-offset;
+      top: 1vh;
 
-  .Y_value {
-    margin: 16px;
-    position: relative;
-    top: 30px;
-    left: 110px;
+      label {
+        display: block;
+        font-size: 1.2vw;
+      }
 
-    input {
-      width: 190px;
-      border-radius: 5px 5px 5px 5px;
-    }
-  }
-
-  .R_value {
-    margin: 16px;
-    position: relative;
-    top: 30px;
-    left: 110px;
-
-    select {
-      width: 195px;
-      border-radius: 5px 5px 5px 5px;
+      select, input {
+        display: block;
+        width: $input-width;
+        height: $input_height;
+        color: #f5f5f5;
+        background-color: #343434;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        font-size: 1vw;
+        font-weight: 300;
+      }
     }
   }
 
   #Error_text {
-    margin: 15px;
     position: relative;
-    top: 45px;
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
 
     * {
-      border: none;
-      outline: none;
+      padding-top: 0.5vh;
+      padding-bottom: 0.5vh;
       text-align: center;
       background: #1d1d1d;
       color: red;
-      font-size: 18px;
-      margin: 4px;
+      font-size: 1.2vw;
       font-family: sans-serif;
     }
   }
 
   .buttons {
     position: relative;
-    left: 37%;
-    top: 70px;
-    align-items: center;
+    left:35%;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    font-size: $box-shadow-unit*4;
 
     * {
       border-radius: 6px;
@@ -88,11 +102,11 @@
       width: 30%;
       height: 40px;
       padding: 0;
-      //font-size: 1rem;
+      font-size: $box-shadow-unit*4;
     }
 
     button:disabled,
-    button[disabled]{
+    button[disabled] {
       border: 1px solid #999999;
       background-color: #cccccc;
       color: #666666;

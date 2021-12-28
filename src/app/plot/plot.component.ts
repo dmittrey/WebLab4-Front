@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ValueTransferService} from "../services/value.transfer.service";
 import {Subscription} from "rxjs";
 import {SvgComponent} from "./svg/svg.component";
@@ -18,7 +18,8 @@ import {HitServeStatus} from "../utility/HitServeStatus";
 @Component({
   selector: 'app-plot',
   templateUrl: './plot.component.html',
-  styleUrls: ['./plot.component.scss']
+  styleUrls: ['./plot.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PlotComponent implements OnDestroy, OnInit {
 
