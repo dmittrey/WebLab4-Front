@@ -8,7 +8,7 @@
       <select id="X_value"
               formControlName="xSelect"
               required>
-        <option [ngValue]="null" disabled selected>Choose your profile</option>
+        <option [ngValue]="null" disabled selected>Select coordinate</option>
         <option *ngFor="let x of xSelectOptions" [ngValue]="x">
           {{ x.value }}
         </option>
@@ -20,6 +20,8 @@
       <label for="Y_value">Y value:</label>
       <input id="Y_value"
              formControlName="yText"
+             placeholder="Enter values (-5 ... 3)"
+             maxlength="6"
              required
              pattern="^[+-]?\d+(\.\d+)?$"/>
     </div>
@@ -31,7 +33,7 @@
               formControlName="rSelect"
               required
               (change)="valueTransfer.switchRValue(rSelect.value.value)">
-        <option [ngValue]="null" disabled selected>Choose your profile</option>
+        <option [ngValue]="null" disabled selected>Select coordinate</option>
         <option *ngFor="let r of rSelectOptions" [ngValue]="r">
           {{ r.value }}
         </option>

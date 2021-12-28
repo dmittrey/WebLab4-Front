@@ -9,7 +9,6 @@ import {FormGroup} from "@angular/forms";
 import {Observer} from "rxjs";
 import {AuthResponse} from "../../utility/AuthResponse";
 import {NavigationService} from "../../services/navigation.service";
-import {SizeAdaptingService} from "../../services/size.adapting.service";
 
 @Component({
   selector: 'app-auth-form',
@@ -50,22 +49,22 @@ export class AuthFormComponent implements AfterViewInit {
 
   /* Observers(Define typical behave for submitRegister/submitLogin) */
   loginObserver: Observer<AuthResponse> = {
-    next: value => {
-      console.log(value);
+    next: () => {
+      //todo Логика обработки ответа какая? Можно сделать на уровень выше чтобы помещать туда токен
+      console.log("Login successful!");
       this.navigationService.goToMain();
     },
-    error: err => {
-      console.log(err);
-      //todo Убрать, это для того чтобы разрабатывать также!
-      this.navigationService.goToMain();
-    },
-    complete: () => console.log("completed")
+    error: err => console.log("Error while logging: " + err),
+    complete: () => console.log("Auth service has been completed while logging!")
   }
 
   registerObserver: Observer<AuthResponse> = {
-    next: value => console.log(value),
-    error: err => console.log(err),
-    complete: () => console.log("completed")
+    next: () => {
+      console.log("Register successful!");
+      this.navigationService.goToMain();
+    },
+    error: err => console.log("Error while register: " + err),
+    complete: () => console.log("Auth service has been completed while register!")
   }
 
   /* Local logic */
@@ -82,8 +81,7 @@ export class AuthFormComponent implements AfterViewInit {
 
   //todo Утечку памяти предотвратить
   constructor(private authService: AuthService,
-              private navigationService: NavigationService,
-              public sizeAdaptingService: SizeAdaptingService) {
+              private navigationService: NavigationService) {
   }
 
   /* Refreshing child components variables */

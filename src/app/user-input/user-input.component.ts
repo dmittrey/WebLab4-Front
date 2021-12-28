@@ -64,7 +64,6 @@ export class UserInputComponent implements OnInit, OnDestroy{
   }
 
   submit() {
-
     console.log(this.xSelect.value.value.toString());
     console.log(this.yText.value);
     console.log(this.rSelect.value.value.toString());

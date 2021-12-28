@@ -33,7 +33,6 @@ import {
   NgxAwesomePopupModule,
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
-import {SizeAdaptingService} from "./services/size.adapting.service";
 
 @NgModule({
   declarations: [
@@ -72,8 +71,7 @@ import {SizeAdaptingService} from "./services/size.adapting.service";
     FormConverterService,
     NavigationService,
     HttpService,
-    ValueTransferService,
-    SizeAdaptingService
+    ValueTransferService
   ],
   bootstrap: [AppComponent]
 })

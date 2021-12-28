@@ -85,7 +85,9 @@
 
   </div>
 
-  <app-auth-form-button (click)="submit()" class="double-border-button"></app-auth-form-button>
+  <app-auth-form-button (click)="submit()"
+                        [ngClass]="{ forbidden: loginFormGroup.invalid }"
+                        class="double-border-button"></app-auth-form-button>
 
 </form>
 
