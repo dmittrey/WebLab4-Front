@@ -1,11 +1,11 @@
 <app-auth-form-switcher></app-auth-form-switcher>
 
 <div class="background">
-  <div class="shape"></div>
-  <div class="shape"></div>
-</div>
+  <div class="shape" id="blueCircle"></div>
+  <div class="shape" id="orangeCircle"></div>
 
-<div class="authForm">
-    <app-auth-form-login *ngIf="isLoginStatus()" (login)="submitLogin($event)"></app-auth-form-login>
-    <app-auth-form-register *ngIf="isRegisterStatus()" (register)="submitRegister($event)"></app-auth-form-register>
+  <div class="authForm">
+    <!--    <app-auth-form-login *ngIf="isLoginStatus()" (login)="submitLogin($event)"></app-auth-form-login>-->
+    <!--    <app-auth-form-register *ngIf="isRegisterStatus()" (register)="submitRegister($event)"></app-auth-form-register>-->
+  </div>
 </div>

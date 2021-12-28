@@ -9,6 +9,7 @@ import {FormGroup} from "@angular/forms";
 import {Observer} from "rxjs";
 import {AuthResponse} from "../../utility/AuthResponse";
 import {NavigationService} from "../../services/navigation.service";
+import {SizeAdaptingService} from "../../services/size.adapting.service";
 
 @Component({
   selector: 'app-auth-form',
@@ -81,7 +82,8 @@ export class AuthFormComponent implements AfterViewInit {
 
   //todo Утечку памяти предотвратить
   constructor(private authService: AuthService,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService,
+              public sizeAdaptingService: SizeAdaptingService) {
   }
 
   /* Refreshing child components variables */
