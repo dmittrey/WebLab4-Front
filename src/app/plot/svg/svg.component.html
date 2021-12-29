@@ -1,1 +1,93 @@
-<div id="plot"></div>
+<div class="plot">
+  <svg [attr.width]="WIDTH" [attr.height]="HEIGHT">
+
+    <!-- Оси координат -->
+    <line [attr.x1]="0" [attr.y1]="HEIGHT / 2" [attr.x2]="WIDTH-WIDTH_UNIT" [attr.y2]="HEIGHT / 2" stroke="white"
+          stroke-width="1"></line>
+    <line [attr.x1]="WIDTH/2" [attr.y1]="HEIGHT" [attr.x2]="WIDTH/2" [attr.y2]="0" stroke="white"
+          stroke-width="1"></line>
+    <!-- Стрелки к осям -->
+    <polygon [attr.points]="WIDTH/2 + ',' + 0 + ' ' +
+                            WIDTH_DELTA_MINUS + ',' + WIDTH_UNIT + ' ' +
+                            WIDTH_DELTA_PLUS + ',' + WIDTH_UNIT"
+             stroke="black"></polygon>
+    <polygon [attr.points]="WIDTH + ',' + WIDTH/2 + ' ' +
+                            WIDTH_MINUS + ',' + WIDTH_DELTA_MINUS + ' ' +
+                            WIDTH_MINUS + ',' + WIDTH_DELTA_PLUS"
+             stroke="black"></polygon>
+    <!-- Метки для значений R на оси X -->
+    <line [attr.x1]="WIDTH/6"
+          [attr.x2]="WIDTH/6"
+          [attr.y1]="HEIGHT/2-HEIGHT_UNIT"
+          [attr.y2]="HEIGHT/2+HEIGHT_UNIT"></line>
+
+    <line [attr.x1]="2*WIDTH/6"
+          [attr.x2]="2*WIDTH/6"
+          [attr.y1]="HEIGHT/2-HEIGHT_UNIT"
+          [attr.y2]="HEIGHT/2+HEIGHT_UNIT"></line>
+
+    <line [attr.x1]="4*WIDTH/6"
+          [attr.x2]="4*WIDTH/6"
+          [attr.y1]="HEIGHT/2-HEIGHT_UNIT"
+          [attr.y2]="HEIGHT/2+HEIGHT_UNIT"></line>
+
+    <line [attr.x1]="5*WIDTH/6"
+          [attr.x2]="5*WIDTH/6"
+          [attr.y1]="HEIGHT/2-HEIGHT_UNIT"
+          [attr.y2]="HEIGHT/2+HEIGHT_UNIT"></line>
+
+    <!-- Метки для значений R на оси Y -->
+    <line [attr.x1]="WIDTH/2-WIDTH_UNIT"
+          [attr.x2]="WIDTH/2+WIDTH_UNIT"
+          [attr.y1]="HEIGHT/6"
+          [attr.y2]="HEIGHT/6"></line>
+
+    <line [attr.x1]="WIDTH/2-WIDTH_UNIT"
+          [attr.x2]="WIDTH/2+WIDTH_UNIT"
+          [attr.y1]="2*HEIGHT/6"
+          [attr.y2]="2*HEIGHT/6"></line>
+
+    <line [attr.x1]="WIDTH/2-WIDTH_UNIT"
+          [attr.x2]="WIDTH/2+WIDTH_UNIT"
+          [attr.y1]="4*HEIGHT/6"
+          [attr.y2]="4*HEIGHT/6"></line>
+
+    <line [attr.x1]="WIDTH/2-WIDTH_UNIT"
+          [attr.x2]="WIDTH/2+WIDTH_UNIT"
+          [attr.y1]="5*HEIGHT/6"
+          [attr.y2]="5*HEIGHT/6"></line>
+
+    <!-- Четверть эллипса в первой четверти -->
+    <path stroke="yellow" fill="yellow" fill-opacity="0.3"
+          [attr.d]="'M' + WIDTH/2 + ',' + HEIGHT/6 +
+             'A' + WIDTH/3 + ',' + WIDTH/3 +
+             ' 90 0,1 ' +
+             5*WIDTH/6 + ',' + HEIGHT/2 +
+             'L' + WIDTH/2 + ',' + HEIGHT/2 +
+             'Z'"></path>
+    <!-- Треугольник в третьей четверти -->
+    <polygon stroke="green" fill="green" fill-opacity="0.3"
+             [attr.points]="WIDTH/2 + ',' + HEIGHT/2 + ' ' +
+             WIDTH/6 + ',' + HEIGHT/2 + ' ' +
+             WIDTH/2 + ',' + 2*HEIGHT/3"></polygon>
+    <!--     Прямоугольник в первой четверти -->
+    <polygon stroke="blue" fill="blue" fill-opacity="0.3"
+             [attr.points]="WIDTH/2 + ',' + HEIGHT/2 + ' ' +
+             2*WIDTH/3 + ',' + HEIGHT/2 + ' ' +
+             2*WIDTH/3 + ',' + 5*HEIGHT/6 + ' ' +
+             WIDTH/2 + ',' + 5*HEIGHT/6"></polygon>
+    <!-- Подписи к осям -->
+    <text [attr.x]="WIDTH_MINUS" [attr.y]="WIDTH_DELTA_MINUS">X</text>
+    <text [attr.x]="WIDTH_DELTA_PLUS" [attr.y]="WIDTH_UNIT">Y</text>
+    <!-- Значения R на оси X -->
+    <text [attr.x]="WIDTH/6 - WIDTH_UNIT" [attr.y]="WIDTH/2 - 1.5*WIDTH_UNIT">-R</text>
+    <text [attr.x]="WIDTH/3 - WIDTH_UNIT" [attr.y]="WIDTH/2 - 1.5*WIDTH_UNIT">-R/2</text>
+    <text [attr.x]="2*WIDTH/3 - WIDTH_UNIT" [attr.y]="WIDTH/2 - 1.5*WIDTH_UNIT">R/2</text>
+    <text [attr.x]="5*WIDTH/6 - 0.5*WIDTH_UNIT" [attr.y]="WIDTH/2 - 1.5*WIDTH_UNIT">R</text>
+    <!-- Значения R на оси Y -->
+    <text [attr.x]="WIDTH_DELTA_PLUS" [attr.y]="WIDTH/6 + WIDTH_UNIT/2">R</text>
+    <text [attr.x]="WIDTH_DELTA_PLUS" [attr.y]="WIDTH/3 + WIDTH_UNIT/2">R/2</text>
+    <text [attr.x]="WIDTH_DELTA_PLUS" [attr.y]="2*WIDTH/3 + WIDTH_UNIT/2">-R/2</text>
+    <text [attr.x]="WIDTH_DELTA_PLUS" [attr.y]="5*WIDTH/6 + WIDTH_UNIT/2">-R</text>
+  </svg>
+</div>

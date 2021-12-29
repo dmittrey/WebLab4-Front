@@ -18,8 +18,7 @@ import {HitServeStatus} from "../utility/HitServeStatus";
 @Component({
   selector: 'app-plot',
   templateUrl: './plot.component.html',
-  styleUrls: ['./plot.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  styleUrls: ['./plot.component.scss']
 })
 export class PlotComponent implements OnDestroy, OnInit {
 

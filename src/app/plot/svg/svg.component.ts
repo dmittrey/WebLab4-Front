@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {SVG} from '@svgdotjs/svg.js';
 import * as $ from 'jquery';
@@ -14,56 +14,73 @@ import {Coordinates} from "../../utility/Coordinates";
 export class SvgComponent implements OnInit {
 
   /* Размер компонента */
-  private WIDTH = 400;
-  private HEIGHT = 400;
+  WIDTH!: number;
+  HEIGHT!: number;
 
-  /* Цвета компонентов плоскости */
-  private AXES_COLOR = '#a2a2a2';
-  private CIRCLE_COLOR = '#234a23';
-  private TRIANGLE_COLOR = '#707023';
-  private RECTANGLE_COLOR = '#232370';
+  WIDTH_UNIT!: number;
+  HEIGHT_UNIT!: number;
+
+  WIDTH_DELTA_MINUS!: number;
+  WIDTH_DELTA_PLUS!: number;
+
+  WIDTH_PLUS!: number;
+  WIDTH_MINUS!: number;
 
   /* Коэф */
   private scale = 0.014;
 
   /* Локальное хранилище попаданий */
-  //todo Сделать отдельный интерфейс для точек
   private attemptsArray: Point[] = [];
 
-  private DEFAULT_R = 3;
+  resizeValues() {
 
-  private SVG: any;
+    // @ts-ignore
+    this.WIDTH = $('.plot').width();
+    // @ts-ignore
+    this.HEIGHT = $('.plot').width();
 
-  constructor() {
+    this.WIDTH_UNIT = this.WIDTH / 40;
+    this.HEIGHT_UNIT = this.HEIGHT / 40;
 
+    this.WIDTH_DELTA_MINUS = this.WIDTH / 2 - this.WIDTH_UNIT;
+    this.WIDTH_DELTA_PLUS = this.WIDTH / 2 + this.WIDTH_UNIT;
+
+    this.WIDTH_MINUS = this.WIDTH - this.WIDTH_UNIT;
+    this.WIDTH_PLUS = this.WIDTH + this.WIDTH_UNIT;
   }
 
   ngOnInit() {
-    this.drawPlot();
+    this.resizeValues();
+    //todo Запросить все точки с сервака
+    window.addEventListener(`resize`, event => {
+      this.resizeValues();
+    }, false);
   }
+
 
   // Инициализация плоскости
   drawPlot() {
     console.log("Starting drawing plot!")
-    this.SVG = SVG()
-      .addTo('#plot')
+    this.SVG = SVG().addTo('.plot')
       .size(this.WIDTH, this.HEIGHT);
 
+    console.log("kek");
+
     //todo странная логика для первой прорисовки
-    if (this.attemptsArray.length === 0) {
-      this.initPlot();
-    } else {
-      this.drawPlotWithPoints(this.attemptsArray);
-    }
+    // if (this.attemptsArray.length === 0) {
+    this.initPlot();
+    // } else {
+    //   this.drawPlotWithPoints(this.attemptsArray);
+    // }
   }
 
 // Отрисовка плоскости без точек
   initPlot() {
     console.log("Строим без точек.")
-    this.drawArea(this.DEFAULT_R);
+    // this.drawArea(this.DEFAULT_R);
     this.drawAxes();
-    this.drawAxesScaleLabels(this.DEFAULT_R);
-    this.drawRValue(this.DEFAULT_R);
+    // this.drawAxesScaleLabels(this.DEFAULT_R);
+    // this.drawRValue(this.DEFAULT_R);
   }
 
   // Отрисовка плоскости с точками
