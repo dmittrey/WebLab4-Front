@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ValueTransferService} from "../services/value.transfer.service";
 import {Subscription} from "rxjs";
 import {SvgComponent} from "./svg/svg.component";
@@ -13,7 +13,6 @@ import {
   ToastUserViewTypeEnum
 } from "@costlydeveloper/ngx-awesome-popup";
 import {HitService} from "../services/hit.service";
-import {HitServeStatus} from "../utility/HitServeStatus";
 
 @Component({
   selector: 'app-plot',
@@ -22,41 +21,33 @@ import {HitServeStatus} from "../utility/HitServeStatus";
 })
 export class PlotComponent implements OnDestroy, OnInit {
 
-  @ViewChild(SvgComponent)
-  private SvgComponent!: SvgComponent;
-
-  private rValue?: number;
-
   options = {
     autoClose: true,
     keepAfterRouteChange: false
   };
 
+  rValueSubscription!: Subscription;
+  hitServiceSubscription!: Subscription;
 
-  // screenHeight?: number;
-  // screenWidth?: number;
-  //
-  // @HostListener('window:resize', ['$event'])
-  // getScreenSize() {
-  //   this.screenHeight = window.innerHeight;
-  //   this.screenWidth = window.innerWidth;
-  //   console.log(this.screenHeight, this.screenWidth);
-  // }
+  @ViewChild(SvgComponent)
+  private SvgComponent!: SvgComponent;
+  private rValue?: number;
 
-  // kek() {
-  //   console.log(window.innerWidth);
-  // }
+  //and add a line in constructor to get services instance
+  constructor(private valueTransfer: ValueTransferService,
+              private hitService: HitService) {
+  }
 
   serveClick(event: MouseEvent) {
     if (this.rValue == undefined) {
       this.toastNotification();
     } else {
-      let clickCoordinates = this.SvgComponent.clickPointEvent(event);
+      let clickCoordinates = this.SvgComponent.getCoords(event);
+      console.log(clickCoordinates);
       this.hitService.addHit({
-        typeOfService: HitServeStatus.ADD,
-        xValue: clickCoordinates.xValue.toString(),
-        yValue: clickCoordinates.yValue.toString(),
-        rValue: clickCoordinates.rValue.toString()
+        xValue: clickCoordinates.xvalue.toString(),
+        yValue: clickCoordinates.yvalue.toString(),
+        rValue: clickCoordinates.rvalue.toString()
       });
     }
   }
@@ -65,18 +56,20 @@ export class PlotComponent implements OnDestroy, OnInit {
     this.SvgComponent.switchRadius(rValue);
   }
 
-  rValueSubscription!: Subscription;
-  hitServiceSubscription!: Subscription;
-
-  //and add a line in constructor to get services instance
-  constructor(private valueTransfer: ValueTransferService,
-              private hitService: HitService) {
-  }
-
   ngOnInit() {
     this.hitServiceSubscription = this.hitService.hitRequestStatus$.subscribe({
       next: value => {
-        console.log("Hit service status updated: " + value);
+        if (value == null) this.SvgComponent.cleanPlot();
+
+        console.log("Hit service status updated: ");
+
+        value.forEach(p => {
+          console.log(p);
+
+          this.SvgComponent.drawPoint(p);
+
+          this.SvgComponent.addPoint(p);
+        })
       }
     })
     this.rValueSubscription = this.valueTransfer.rValue$.subscribe({
