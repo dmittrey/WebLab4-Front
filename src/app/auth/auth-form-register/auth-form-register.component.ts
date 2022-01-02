@@ -50,12 +50,7 @@ export class AuthFormRegisterComponent {
     validator: CustomValidators.passwordMatchValidator
   })
 
-  submit() {
-    // Если подтвердили то прокидываем вверх
-    if (this.loginFormGroup.valid) {
-      console.log(this.loginFormGroup.value);
-      this.register.emit(this.loginFormGroup);
-    }
+  constructor(private fb: FormBuilder) {
   }
 
   get username() {
@@ -70,7 +65,12 @@ export class AuthFormRegisterComponent {
     return this.loginFormGroup.controls['confirmPassword'];
   }
 
-  constructor(private fb: FormBuilder) {
+  submit() {
+    // Если подтвердили то прокидываем вверх
+    if (this.loginFormGroup.valid) {
+      console.log(this.loginFormGroup.value);
+      this.register.emit(this.loginFormGroup);
+    }
   }
 
 }

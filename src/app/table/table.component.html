@@ -1,7 +1,7 @@
 <section class="table_section">
 
   <div id="cleaner">
-    <button class="cleanerButton">CLEAN TABLE</button>
+    <button class="cleanerButton" (click)="clearTable()">CLEAN TABLE</button>
   </div>
 
   <div>
@@ -13,6 +13,14 @@
         <th>CURRENT TIME</th>
         <th>EXECUTION TIME</th>
         <th>HIT RESULT</th>
+      </tr>
+      <tr *ngFor="let point of hitList">
+        <td>{{point.coordinates.xvalue.toFixed(3)}}</td>
+        <td>{{point.coordinates.yvalue.toFixed(3)}}</td>
+        <td>{{point.coordinates.rvalue.toFixed(3)}}</td>
+        <td>{{point.currentTime}}</td>
+        <td>{{point.executionTime}}</td>
+        <td [style.color]="point.hitResult ? 'green' : 'red'">{{point.hitResult ? "TRUE" : "FALSE"}}</td>
       </tr>
     </table>
   </div>

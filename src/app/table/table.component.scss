@@ -59,11 +59,15 @@ $button-height: 0.7 * $height/15;
   #hitTable {
     position: relative;
     font-size: $box-shadow-unit*4;
-    width: $table-width;//todo
+    width: $table-width; //todo
     border: 1px solid black;
     box-shadow: 0 0 $box-shadow-unit * 2 $box-shadow-unit rgba(221, 221, 221, 1);
     transition: 0.5s;
     border-radius: $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4;
+
+    * {
+      text-align: center
+    }
 
     tr:first-of-type {
       background: rgba(0, 0, 0, 0.83);

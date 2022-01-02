@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {HitService} from "../services/hit.service";
-import {HitServeStatus} from "../utility/HitServeStatus";
 import {Point} from "../utility/Point";
 
 @Component({
@@ -14,18 +13,27 @@ export class TableComponent implements OnInit, OnDestroy {
   hitServiceSubscription!: Subscription;
   hitList: Point[] = [];
 
-  constructor(private hitService: HitService) { }
+  constructor(private hitService: HitService) {
+  }
+
+  clearTable() {
+    this.hitList = [];
+    this.hitService.removeAllHits();
+  }
 
   ngOnInit(): void {
     this.hitServiceSubscription = this.hitService.hitRequestStatus$.subscribe({
       next: value => {
-        console.log("Table updated by hits: " + value);
+        console.log("Table updated by hits: ");
+        console.log(value[0]);
         if (value != null) {
-          if (value.serveStatus == HitServeStatus.ADD) this.hitList.push(value.data[0]);
-          if (value.serveStatus == HitServeStatus.GET_ALL) this.hitList = value.data;
+          if (value.length == 1) this.hitList.push(value[0]);
+          if (value.length > 1) this.hitList = value;
         }
       }
     })
+
+    this.hitService.getAllHits();
   }
 
   ngOnDestroy(): void {

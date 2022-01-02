@@ -1,49 +1,60 @@
 import {Injectable} from "@angular/core";
 import {AuthResponse} from "../utility/AuthResponse";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthRequest} from "../utility/AuthRequest";
 import {HitRequest} from "../utility/HitRequest";
-import {HitResponse} from "../utility/HitResponse";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {HandleErrorService} from "./handle.error.service";
+import {AuthType} from "../utility/AuthType";
+import {HitRequestType} from "../utility/HitRequestType";
+import {Point} from "../utility/Point";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
+  token!: string;
+
   /**
    * For testing on mock server
    */
-  private authUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/auth';
-  private hitServeUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/hit';
+  // private authUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/auth';
+  // private hitServeUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/hit';
 
   /**
-   * In real life
+   * In real case
    */
-  // private authUrl = 'https://localhost:5903/auth';
-  //private hitServeUrl = 'https://localhost:5903/hit';
-
-  authHttpRequest(authRequest: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.authUrl, authRequest, {
-      observe: 'body',
-      responseType: 'json'
-    }).pipe(
-      catchError(this.errorHandler.handleHTTPError)
-    );
-  }
-
-  hitHttpRequest(hitRequest: HitRequest): Observable<HitResponse> {
-    return this.http.post<HitResponse>(this.hitServeUrl, hitRequest, {
-      observe: 'body',
-      responseType: 'json'
-    }).pipe(
-      catchError(this.errorHandler.handleHTTPError)
-    );
-  }
+  private authUrl = 'http://localhost:8080/user';
+  private hitServeUrl = 'http://localhost:8080/hit';
 
   constructor(private http: HttpClient,
               private errorHandler: HandleErrorService) {
+  }
+
+  authHttpRequest(authRequest: AuthRequest, authType: AuthType): Observable<AuthResponse> {
+    console.log(authRequest);
+    return this.http.post<AuthResponse>(this.authUrl.concat("/", authType), authRequest, {
+      observe: 'body',
+      responseType: 'json'
+    }).pipe(
+      tap((authResponse) => this.token = authResponse.token),
+      catchError(this.errorHandler.handleHTTPError)
+    );
+  }
+
+  hitHttpRequest(hitRequest: HitRequest | null, hitRequestType: HitRequestType): Observable<Point[]> {
+    console.log(hitRequest);
+    return this.http.post<Point[]>(this.hitServeUrl.concat("/", hitRequestType), hitRequest, {
+      observe: 'body',
+      responseType: 'json',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer_'.concat(this.token)
+      })
+    }).pipe(
+      tap((hitResponse) => console.log(hitResponse)),
+      catchError(this.errorHandler.handleHTTPError)
+    );
   }
 }

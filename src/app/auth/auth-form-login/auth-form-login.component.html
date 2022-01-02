@@ -6,8 +6,9 @@
          id="username"
          formControlName="username"
          required
-         [minlength]="3"
-         [maxLength]="30">
+         minlength="3"
+         maxLength="30"
+         pattern="^[a-zA-Z-0123456789]*$">
 
   <div *ngIf="username.dirty
           || username.touched" id="usernameAlerts">
@@ -27,10 +28,10 @@
     </div>
 
     <!--    3. check whether the entered username has a special character-->
-<!--    <div *ngIf="username.hasError('pattern')">-->
-<!--      <app-alert-field className="patternAlert"-->
-<!--                       innerText="Username has should have only symbols [^[a-zA-Z-0123456789]*$]!"></app-alert-field>-->
-<!--    </div>-->
+    <div *ngIf="username.hasError('pattern')">
+      <app-alert-field className="patternAlert"
+                       innerText="Username has should have only symbols [^[a-zA-Z-0123456789]*$]!"></app-alert-field>
+    </div>
 
     <div *ngIf="username.hasError('whitespace')">
       <app-alert-field className="patternAlert"
@@ -77,7 +78,7 @@
     <!--    5. check whether the entered password has a special character-->
     <div *ngIf="password.hasError('hasSpecialCharacters')">
       <app-alert-field className="hasSpecialCharactersAlert"
-                       innerText="Password should have one of a special characters: [!@#$%^&*()_+-=[]{};':|,.<>\/?]"></app-alert-field>
+                       innerText="Password should have one of a special characters: [!@#$%^&+=_]"></app-alert-field>
     </div>
 
     <!--    6. Has a minimum length of 8 characters-->

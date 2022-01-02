@@ -28,7 +28,7 @@ export class AuthFormLoginComponent {
       CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
 
       // 4. check whether the entered password has a special character
-      CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/, {hasSpecialCharacters: true}),
+      CustomValidators.patternValidator(/[!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/, {hasSpecialCharacters: true}),
     ])]
   });
 

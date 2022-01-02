@@ -5,7 +5,7 @@
   <div class="shape" id="orangeCircle"></div>
 
   <div class="authForm">
-        <app-auth-form-login *ngIf="isLoginStatus()" (login)="submitLogin($event)"></app-auth-form-login>
-        <app-auth-form-register *ngIf="isRegisterStatus()" (register)="submitRegister($event)"></app-auth-form-register>
+    <app-auth-form-login (login)="submitLogin($event)" *ngIf="isLoginStatus()"></app-auth-form-login>
+    <app-auth-form-register (register)="submitRegister($event)" *ngIf="isRegisterStatus()"></app-auth-form-register>
   </div>
 </div>

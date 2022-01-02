@@ -7,8 +7,8 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class NavigationService {
 
-  //todo CanDeactivate to mediate navigation away from the current route.
-  // Через это буду отрезать токен
+  constructor(private router: Router) {
+  }
 
   goToMain() {
     console.log("Go to main!");
@@ -18,8 +18,5 @@ export class NavigationService {
   goToEntry() {
     console.log("Go to entry!");
     this.router.navigate(['/entry']);
-  }
-
-  constructor(private router: Router) {
   }
 }

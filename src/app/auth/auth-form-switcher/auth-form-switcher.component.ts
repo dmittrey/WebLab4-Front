@@ -11,15 +11,15 @@ export class AuthFormSwitcherComponent {
 
   authStatus!: AuthStatus;
 
+  constructor() {
+    this.authStatus = AuthStatus.LOGIN;
+  }
+
   switchLogin() {
     this.authStatus = AuthStatus.LOGIN;
   }
 
   switchRegister() {
     this.authStatus = AuthStatus.REGISTER;
-  }
-
-  constructor() {
-    this.authStatus = AuthStatus.LOGIN;
   }
 }
