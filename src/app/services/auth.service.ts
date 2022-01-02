@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {delay, Observable, tap} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {AuthResponse} from "../utility/AuthResponse";
 import {FormGroup} from "@angular/forms";
 import {FormConverterService} from "./form.converter.service";
-import {AuthStatus} from "../auth/AuthStatus";
 import {HttpService} from "./http.service";
+import {AuthType} from "../utility/AuthType";
 
 @Injectable({
   providedIn: 'root'
@@ -15,29 +15,30 @@ export class AuthService {
 
   constructor(private httpService: HttpService,
               private formConverter: FormConverterService) {
-    this.isLoggedIn = localStorage.getItem("isLoggedIn") != null;
+    this.isLoggedIn = false;
   }
 
   loginUser(loginData: FormGroup): Observable<AuthResponse> {
     return this.httpService.authHttpRequest(
-      this.formConverter.convertAuthToRequest(loginData, AuthStatus.LOGIN)
+      this.formConverter.convertAuthToRequest(loginData), AuthType.LOGIN
     ).pipe(
-      delay(3000),//todo Нужно ли ждать 3 секунды ответа?
       tap(() => {
         this.isLoggedIn = true;
-        localStorage.setItem("isLoggedIn", "Privet");
-      }) // Держать в куки
+      })
     );
   };
 
   registerUser(registerData: FormGroup): Observable<AuthResponse> {
     return this.httpService.authHttpRequest(
-      this.formConverter.convertAuthToRequest(registerData, AuthStatus.LOGIN)
+      this.formConverter.convertAuthToRequest(registerData), AuthType.REGISTER
+    ).pipe(
+      tap(() => {
+        this.isLoggedIn = true;
+      })
     );
   };
 
   logout(): void {
     this.isLoggedIn = false;
-    localStorage.removeItem("isLoggedIn");
   }
 }
