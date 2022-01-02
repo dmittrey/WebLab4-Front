@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {SVG} from '@svgdotjs/svg.js';
 import * as $ from 'jquery';
@@ -14,17 +14,13 @@ import {Coordinates} from "../../utility/Coordinates";
 export class SvgComponent implements OnInit {
 
   /* Размер компонента */
-  WIDTH!: number;
-  HEIGHT!: number;
+  private WIDTH = 400;
 
-  WIDTH_UNIT!: number;
-  HEIGHT_UNIT!: number;
-
-  WIDTH_DELTA_MINUS!: number;
-  WIDTH_DELTA_PLUS!: number;
-
-  WIDTH_PLUS!: number;
-  WIDTH_MINUS!: number;
+  /* Цвета компонентов плоскости */
+  private AXES_COLOR = '#a2a2a2';
+  private CIRCLE_COLOR = '#234a23';
+  private TRIANGLE_COLOR = '#707023';
+  private RECTANGLE_COLOR = '#232370';
 
   /* Коэф */
   private scale = 0.014;
@@ -32,55 +28,50 @@ export class SvgComponent implements OnInit {
   /* Локальное хранилище попаданий */
   private attemptsArray: Point[] = [];
 
-  resizeValues() {
+  private DEFAULT_R = 3;
 
-    // @ts-ignore
-    this.WIDTH = $('.plot').width();
-    // @ts-ignore
-    this.HEIGHT = $('.plot').width();
+  private SVG: any;
 
-    this.WIDTH_UNIT = this.WIDTH / 40;
-    this.HEIGHT_UNIT = this.HEIGHT / 40;
-
-    this.WIDTH_DELTA_MINUS = this.WIDTH / 2 - this.WIDTH_UNIT;
-    this.WIDTH_DELTA_PLUS = this.WIDTH / 2 + this.WIDTH_UNIT;
-
-    this.WIDTH_MINUS = this.WIDTH - this.WIDTH_UNIT;
-    this.WIDTH_PLUS = this.WIDTH + this.WIDTH_UNIT;
-  }
-
-  ngOnInit() {
-    this.resizeValues();
-    //todo Запросить все точки с сервака
-    window.addEventListener(`resize`, event => {
-      this.resizeValues();
+  constructor() {
+    window.addEventListener(`resize`, () => {
+      this.resize();
+      $('#plot').empty();
+      this.drawPlot();
     }, false);
   }
 
+  resize() {
+    // @ts-ignore
+    this.WIDTH = $('#plot').width();
+  }
+
+  ngOnInit() {
+    this.resize();
+    this.drawPlot();
+  }
 
   // Инициализация плоскости
   drawPlot() {
     console.log("Starting drawing plot!")
-    this.SVG = SVG().addTo('.plot')
-      .size(this.WIDTH, this.HEIGHT);
-
-    console.log("kek");
+    this.SVG = SVG()
+      .addTo('#plot')
+      .size(this.WIDTH, this.WIDTH);
 
     //todo странная логика для первой прорисовки
-    // if (this.attemptsArray.length === 0) {
-    this.initPlot();
-    // } else {
-    //   this.drawPlotWithPoints(this.attemptsArray);
-    // }
+    if (this.attemptsArray.length === 0) {
+      this.initPlot();
+    } else {
+      this.drawPlotWithPoints(this.attemptsArray);
+    }
   }
 
 // Отрисовка плоскости без точек
   initPlot() {
     console.log("Строим без точек.")
-    // this.drawArea(this.DEFAULT_R);
+    this.drawArea(this.DEFAULT_R);
     this.drawAxes();
-    // this.drawAxesScaleLabels(this.DEFAULT_R);
-    // this.drawRValue(this.DEFAULT_R);
+    this.drawAxesScaleLabels(this.DEFAULT_R);
+    this.drawRValue(this.DEFAULT_R);
   }
 
   // Отрисовка плоскости с точками
@@ -101,7 +92,7 @@ export class SvgComponent implements OnInit {
   }
 
   convertToCoordinateY(yValue: number) {
-    return (this.HEIGHT / 2) - yValue / (2 * this.scale);
+    return (this.WIDTH / 2) - yValue / (2 * this.scale);
   }
 
   /* Конвертация из значений в координаты */
@@ -110,7 +101,7 @@ export class SvgComponent implements OnInit {
   }
 
   convertToValueY(yCoordinate: number) {
-    return ((this.HEIGHT / 2) - yCoordinate) * 2 * this.scale;
+    return ((this.WIDTH / 2) - yCoordinate) * 2 * this.scale;
   }
 
   /* Утилитарные методы для построения плоскости */
@@ -120,13 +111,13 @@ export class SvgComponent implements OnInit {
     const arrowSize = 10;
 
     // x axe
-    this.SVG.line(0, (this.HEIGHT / 2), this.WIDTH, (this.HEIGHT / 2)).stroke({width: 1, color: this.AXES_COLOR});
+    this.SVG.line(0, (this.WIDTH / 2), this.WIDTH, (this.WIDTH / 2)).stroke({width: 1, color: this.AXES_COLOR});
 
     // x axe arrow
     let triangleX = (this.WIDTH - arrowSize) + ','
-      + (this.HEIGHT / 2 - arrowSize / 2) + ' ' + (this.WIDTH - arrowSize) + ','
-      + (this.HEIGHT / 2 + arrowSize / 2) + ' ' + (this.WIDTH) + ','
-      + (this.HEIGHT / 2);
+      + (this.WIDTH / 2 - arrowSize / 2) + ' ' + (this.WIDTH - arrowSize) + ','
+      + (this.WIDTH / 2 + arrowSize / 2) + ' ' + (this.WIDTH) + ','
+      + (this.WIDTH / 2);
     //todo Какого хуя?
     // noinspection TypeScriptValidateJSTypes
     this.SVG.polygon(triangleX).fill(this.AXES_COLOR);
@@ -137,10 +128,10 @@ export class SvgComponent implements OnInit {
       family: 'Menlo, sans-serif',
       anchor: 'end',
       fill: this.AXES_COLOR
-    }).x(this.WIDTH - 2 * arrowSize).y(this.HEIGHT / 2 - 2.5 * arrowSize);
+    }).x(this.WIDTH - 2 * arrowSize).y(this.WIDTH / 2 - 2.5 * arrowSize);
 
     // y axe
-    this.SVG.line(this.WIDTH / 2, 0, this.WIDTH / 2, this.HEIGHT).stroke({width: 1, color: this.AXES_COLOR});
+    this.SVG.line(this.WIDTH / 2, 0, this.WIDTH / 2, this.WIDTH).stroke({width: 1, color: this.AXES_COLOR});
 
     // y axe arrow
     const triangleY = (this.WIDTH / 2 - arrowSize / 2) + ',' + (arrowSize) + ' ' +
@@ -183,7 +174,7 @@ export class SvgComponent implements OnInit {
       family: 'Menlo, sans-serif',
       anchor: 'end',
       fill: this.AXES_COLOR
-    }).x(this.WIDTH - 77).y(this.HEIGHT - 50);
+    }).x(this.WIDTH - 77).y(this.WIDTH - 50);
   }
 
   drawAxesScaleLabels(rValue: number) {
@@ -207,19 +198,23 @@ export class SvgComponent implements OnInit {
   drawArea = (rValue: number) => {
     let circlePath = 'M ' + (this.convertToCoordinateX(0)) + ', ' + (this.convertToCoordinateY(rValue)) + ' ' +
       'A' + rValue / (2 * this.scale) + ', ' + rValue / (2 * this.scale) + ' ' +
-      '90 0,1 ' + (this.convertToCoordinateX(rValue)) + ', ' + (this.convertToCoordinateY(0)) + ' L 200,200 Z'
+      '90 0,1 ' + (this.convertToCoordinateX(rValue)) + ', ' + (this.convertToCoordinateY(0)) +
+      ' L ' + (this.convertToCoordinateX(0)) + ',' + (this.convertToCoordinateY(0)) + ' Z';
+
     let triangle = (this.convertToCoordinateX(0)) + ', ' + (this.convertToCoordinateY(0)) + ' ' +
-      (this.convertToCoordinateX(rValue / 2)) + ', ' + (this.convertToCoordinateY(0)) + ' ' +
+      (this.convertToCoordinateX(-rValue)) + ', ' + (this.convertToCoordinateY(0)) + ' ' +
       (this.convertToCoordinateX(0)) + ', ' + (this.convertToCoordinateY(-rValue / 2));
 
     this.SVG.path(circlePath)
       .fill(this.CIRCLE_COLOR)
       .x(this.convertToCoordinateX(0))
       .y(this.convertToCoordinateY(rValue));
-    this.SVG.rect(rValue / (2 * this.scale), rValue / (4 * this.scale))
+
+    this.SVG.rect(rValue / (4 * this.scale), rValue / (2 * this.scale))
       .fill(this.RECTANGLE_COLOR)
-      .x(this.convertToCoordinateX(-rValue))
-      .y(this.convertToCoordinateY(rValue / 2));
+      .x(this.convertToCoordinateX(0))
+      .y(this.convertToCoordinateY(-rValue / 2 * this.scale));
+
     // noinspection TypeScriptValidateJSTypes
     this.SVG.polygon(triangle)
       .fill(this.TRIANGLE_COLOR);
@@ -228,57 +223,34 @@ export class SvgComponent implements OnInit {
   drawPoint = (point: Point) => {
     let color = (point.hitResult) ? '#0f0' : '#f00';
 
-    // @ts-ignore
-    this.SVG.circle(point.coordinates.rValue * 2)
+    this.SVG.circle(point.coordinates.rvalue * 2)
       .fill(color)
-      .x(this.convertToCoordinateX(point.coordinates.xValue) - point.coordinates.rValue)
-      .y(this.convertToCoordinateY(point.coordinates.yValue) - point.coordinates.rValue);
-  }
-
-  clickPointEvent(event: MouseEvent): Coordinates {
-    let coordinates = this.getCoords(event);
-
-    console.log("Click working at coordinates: " + coordinates.xValue + ", " + coordinates.yValue + ", " + coordinates.rValue);
-
-    //todo Перенести на постобработку ответа от бэка
-    this.drawPoint({
-      hitResult: true,
-      coordinates: coordinates
-    });
-    this.addPoint(coordinates.xValue, coordinates.yValue, coordinates.rValue, true);
-    // (validateR(coordinates.r)) ? sendGraphRequest(coordinates) : injectRAlert(coordinates.r);
-    return coordinates;
+      .x(this.convertToCoordinateX(point.coordinates.xvalue) - point.coordinates.rvalue)
+      .y(this.convertToCoordinateY(point.coordinates.yvalue) - point.coordinates.rvalue);
   }
 
   getCoords(event: MouseEvent): Coordinates {
     const rect = $('#plot').offset();
     return {
       // @ts-ignore
-      xValue: this.convertToValueX(event.pageX - rect?.left),
+      xvalue: this.convertToValueX(event.pageX - rect?.left),
       // @ts-ignore
-      yValue: this.convertToValueY(event.pageY - rect?.top),
-      rValue: this.DEFAULT_R
+      yvalue: this.convertToValueY(event.pageY - rect?.top),
+      rvalue: this.DEFAULT_R
     }
   }
 
   switchRadius(rValue: number): void {
     console.log("Radius switched to: " + rValue);
-    //todo Подумать что делать с лейблом(отрицательный или нет?)
-    this.DEFAULT_R = Math.abs(rValue);
     $('#plot').empty();
-    this.drawPlot();
 
+    if (rValue > 0) {
+      this.DEFAULT_R = rValue;
+      this.drawPlot();
+    }
   }
 
-  addPoint = (xValue: number, yValue: number, rValue: number, hitResult: boolean) => {
-    let point: Point = {
-      coordinates: {
-        xValue: xValue,
-        yValue: yValue,
-        rValue: rValue
-      },
-      hitResult: hitResult
-    }
+  addPoint = (point: Point) => {
     this.attemptsArray.push(point);
   }
 
