@@ -17,7 +17,7 @@ export class CustomValidators {
     };
   }
 
-  static strictUnEquationValidator(minValue: number, maxValue:number, minError:ValidationErrors, maxError:ValidationErrors): ValidatorFn {
+  static strictUnEquationValidator(minValue: number, maxValue: number, minError: ValidationErrors, maxError: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [p: string]: any } | null => {
       if (!control.value) {
         // if control is empty return no error

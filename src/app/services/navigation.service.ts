@@ -1,9 +1,6 @@
 import {Router} from '@angular/router';
 import {Injectable} from "@angular/core";
 
-//todo Можно дёргать параметры с другой странички!
-// https://angular.io/guide/router#accessing-query-parameters-and-fragments
-
 @Injectable()
 export class NavigationService {
 

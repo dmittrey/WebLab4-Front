@@ -1,7 +1,7 @@
 <form [formGroup]="loginFormGroup">
 
   <label class="field" for="username">Username:</label>
-  <input type="text" placeholder="Username" id="username" formControlName="username">
+  <input formControlName="username" id="username" placeholder="Username" type="text">
 
   <div *ngIf="username.dirty
           || username.touched" id="usernameAlerts">
@@ -29,7 +29,7 @@
   </div>
 
   <label class="field" for="password">Password:</label>
-  <input type="password" placeholder="Password" id="password" formControlName="password">
+  <input formControlName="password" id="password" placeholder="Password" type="password">
 
   <div *ngIf="password.dirty
           || password.touched" id="passwordAlerts">
@@ -73,7 +73,7 @@
   </div>
 
   <label class="field" for="confirmPassword">Password again:</label>
-  <input type="password" placeholder="Password again" id="confirmPassword" formControlName="confirmPassword">
+  <input formControlName="confirmPassword" id="confirmPassword" placeholder="Password again" type="password">
 
   <div *ngIf="confirmPassword.dirty
           || confirmPassword.touched" id="confirmPasswordAlerts">

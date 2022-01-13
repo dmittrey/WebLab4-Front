@@ -10,9 +10,6 @@ const routes: Routes = [
   {path: '**', redirectTo: 'entry'}
 ];
 
-//todo Можно сделать ленивую подгрузку модуля Main
-//todo Можно сделать страничку 404
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

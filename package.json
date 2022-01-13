@@ -26,7 +26,7 @@
     "angular-alert-module": "^2.0.3",
     "angular-notifier": "^9.1.0",
     "eva-icons": "^1.1.2",
-    "rxjs": "~7.4.0",
+    "rxjs": "^7.4.0",
     "svg.draggable.js": "^3.0.0",
     "svg.js": "^2.7.1",
     "tslib": "^2.3.0",

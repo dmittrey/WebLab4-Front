@@ -10,7 +10,6 @@ export class ValueTransferService {
   // Observable объект rValueStorage
   rValue$ = this.rValueStorage.asObservable();
 
-  //Метод для изменения состояния хранилища чтобы нотифаить всех подписчиков изменения наа RValue
   switchRValue(rValue: number) {
     this.rValueStorage.next(rValue);
   }

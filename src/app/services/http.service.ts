@@ -17,15 +17,6 @@ export class HttpService {
 
   token!: string;
 
-  /**
-   * For testing on mock server
-   */
-  // private authUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/auth';
-  // private hitServeUrl = 'https://b22c7f64-2244-49a8-a66f-1f96359f0b70.mock.pstmn.io/hit';
-
-  /**
-   * In real case
-   */
   private authUrl = 'http://localhost:8080/user';
   private hitServeUrl = 'http://localhost:8080/hit';
 

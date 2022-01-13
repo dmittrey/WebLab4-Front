@@ -32,12 +32,7 @@ export class AuthFormLoginComponent {
     ])]
   });
 
-  submit() {
-    console.log(this.loginFormGroup.valid);
-    if (this.loginFormGroup.valid) {
-      // console.log(this.loginFormGroup.value);
-      this.login.emit(this.loginFormGroup);
-    }
+  constructor(private fb: FormBuilder) {
   }
 
   get username() {
@@ -48,7 +43,12 @@ export class AuthFormLoginComponent {
     return this.loginFormGroup.controls['password'];
   }
 
-  constructor(private fb: FormBuilder) {
+  submit() {
+    console.log(this.loginFormGroup.valid);
+    if (this.loginFormGroup.valid) {
+      // console.log(this.loginFormGroup.value);
+      this.login.emit(this.loginFormGroup);
+    }
   }
 
 }

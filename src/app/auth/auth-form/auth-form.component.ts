@@ -6,9 +6,9 @@ import {AuthFormButtonComponent} from "../auth-form-button/auth-form-button.comp
 import {AuthFormSwitcherComponent} from "../auth-form-switcher/auth-form-switcher.component";
 import {AuthService} from "../../services/auth.service";
 import {FormGroup} from "@angular/forms";
-import {Observer} from "rxjs";
 import {AuthResponse} from "../../utility/AuthResponse";
 import {NavigationService} from "../../services/navigation.service";
+import {Observer} from "rxjs";
 
 @Component({
   selector: 'app-auth-form',
@@ -21,7 +21,6 @@ export class AuthFormComponent implements AfterViewInit {
   /* Observers(Define typical behave for submitRegister/submitLogin) */
   loginObserver: Observer<AuthResponse> = {
     next: (value) => {
-      //todo Логика обработки ответа какая? Можно сделать на уровень выше чтобы помещать туда токен
       console.log("Login successful!");
       console.log(value);
       this.navigationService.goToMain();
@@ -49,7 +48,6 @@ export class AuthFormComponent implements AfterViewInit {
   @ViewChild(AuthFormSwitcherComponent)
   private authSwitcher!: AuthFormSwitcherComponent;
 
-  //todo Утечку памяти предотвратить
   constructor(private authService: AuthService,
               private navigationService: NavigationService) {
   }
@@ -68,9 +66,8 @@ export class AuthFormComponent implements AfterViewInit {
   }
 
   /* Local logic */
-  /**
-   * Меняем состояние окна в template через ngIf!!
-   */
+
+  /* (Меняем состояние окна в template через ngIf) */
   isLoginStatus(): boolean {
     return this.authStatus() == AuthStatus.LOGIN;
   }

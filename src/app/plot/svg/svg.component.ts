@@ -57,12 +57,9 @@ export class SvgComponent implements OnInit {
       .addTo('#plot')
       .size(this.WIDTH, this.WIDTH);
 
-    //todo странная логика для первой прорисовки
-    if (this.attemptsArray.length === 0) {
-      this.initPlot();
-    } else {
-      this.drawPlotWithPoints(this.attemptsArray);
-    }
+    (this.attemptsArray.length === 0)
+      ? this.initPlot()
+      : this.drawPlotWithPoints(this.attemptsArray);
   }
 
 // Отрисовка плоскости без точек
@@ -118,8 +115,7 @@ export class SvgComponent implements OnInit {
       + (this.WIDTH / 2 - arrowSize / 2) + ' ' + (this.WIDTH - arrowSize) + ','
       + (this.WIDTH / 2 + arrowSize / 2) + ' ' + (this.WIDTH) + ','
       + (this.WIDTH / 2);
-    //todo Какого хуя?
-    // noinspection TypeScriptValidateJSTypes
+
     this.SVG.polygon(triangleX).fill(this.AXES_COLOR);
 
     // x axe label
@@ -230,11 +226,9 @@ export class SvgComponent implements OnInit {
   }
 
   getCoords(event: MouseEvent): Coordinates {
-    const rect = $('#plot').offset();
+    const rect = $('#plot').offset()!;
     return {
-      // @ts-ignore
       xvalue: this.convertToValueX(event.pageX - rect?.left),
-      // @ts-ignore
       yvalue: this.convertToValueY(event.pageY - rect?.top),
       rvalue: this.DEFAULT_R
     }
@@ -252,15 +246,6 @@ export class SvgComponent implements OnInit {
 
   addPoint = (point: Point) => {
     this.attemptsArray.push(point);
-  }
-
-  resetDots(newAttemptsArray: Point[]) {
-    if (newAttemptsArray.length !== 0) {
-      this.attemptsArray = [];
-      newAttemptsArray.forEach(dot => {
-        this.attemptsArray.push(dot);
-      })
-    }
   }
 
   cleanPlot() {

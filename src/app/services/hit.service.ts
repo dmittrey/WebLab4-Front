@@ -5,9 +5,7 @@ import {HitRequest} from "../utility/HitRequest";
 import {HitRequestType} from "../utility/HitRequestType";
 import {Point} from "../utility/Point";
 
-/**
- * При использовании данного сервиса необходимо подписаться на обновления hitRequestStatus$
- */
+/* При использовании данного сервиса необходимо подписаться на обновления hitRequestStatus$ */
 @Injectable({
   providedIn: 'root'
 })
