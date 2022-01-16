@@ -1,69 +1,36 @@
-@function toVh($value) {
-  @return $value / 100vw * 100vh;
-}
-
-$width: 100vw;
-$height: toVh(95vw);
-
-$plot-width: 5 * $width/15;
-
-$user-input-width: 5 * $width/15;
-
-$table-width: 13 * $width/15;
-
-$box-shadow-unit: 0.01 * $plot-width; // 5px
-
-$plot-left-offset: $width/15;
-$plot-top-offset: 2 * $height/15;
-
-$user-input-left-offset: 9 * $width/15;
-$user-input-top-offset: 2 * $height/15;
-
-$table-left-offset: $width/15;
-
-$cleaner-left-offset: 5 * $width/15;
-
-$button-width: 1.5 * $width/15;
-$button-height: 0.7 * $height/15;
-
-// 1/15 | 5/15 | 3/15 | 5/15 | 1/15
-
 .table_section {
-  width: $table-width;
+  width: 100%;
 
   #cleaner {
     position: relative;
-    padding: 1vw;
-    left: $cleaner-left-offset;
-    font-size: $box-shadow-unit*4;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    text-align: center;
 
     button {
       color: whitesmoke;
       background: rgba(0, 0, 0, 0.83);
-      width: $button-width;
-      height: $button-height;
-      border-radius: 20px 20px 20px 20px;
-      font-size: $box-shadow-unit*3;
-      //transition: 0.5s;
-    }
+      width: 20%;
+      height: 50%;
+      border-radius: 1vw 1vw 1vw 1vw;
+      transition: 0.5s;
 
-    button:hover {
-      box-shadow: 0 0 10px 5px navajowhite;
-    }
+      &:hover {
+        box-shadow: 0 0 1vw 0.5vw navajowhite;
+      }
 
-    button:active {
-      box-shadow: 0 0 10px 5px #f41c52;
+      &:active {
+        box-shadow: 0 0 2vw 1vw #f41c52;
+      }
     }
   }
 
   #hitTable {
     position: relative;
-    font-size: $box-shadow-unit*4;
-    width: $table-width;
-    border: 1px solid black;
-    box-shadow: 0 0 $box-shadow-unit * 2 $box-shadow-unit rgba(221, 221, 221, 1);
+    width: 100%;
+    box-shadow: 0 0 1vw 0.5vw rgba(221, 221, 221, 1);
     transition: 0.5s;
-    border-radius: $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4 $box-shadow-unit * 4;
+    border-radius: 4vw 4vw 4vw 4vw;
 
     * {
       text-align: center
@@ -78,12 +45,12 @@ $button-height: 0.7 * $height/15;
     }
 
     td, th {
-      border-radius: $box-shadow-unit*4 $box-shadow-unit*4 $box-shadow-unit*4 $box-shadow-unit*4;
-      padding: $box-shadow-unit;
+      border-radius: 4vw 4vw 4vw 4vw;
     }
+
   }
 
   #hitTable:hover {
-    box-shadow: 0 0 $box-shadow-unit*8 $box-shadow-unit #f41c52;
+    box-shadow: 0 0 2vw 1vw #f41c52;
   }
 }

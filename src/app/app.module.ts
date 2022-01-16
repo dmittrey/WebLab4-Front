@@ -28,11 +28,11 @@ import {CommonModule} from '@angular/common';
 import {HitService} from "./services/hit.service";
 import {HttpService} from "./services/http.service";
 import {ValueTransferService} from "./services/value.transfer.service";
-
 import {
   NgxAwesomePopupModule,
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
+import {ExitButtonComponent} from './exit-button/exit-button.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,8 @@ import {
     PlotComponent,
     TableComponent,
     UserInputComponent,
-    SvgComponent
+    SvgComponent,
+    ExitButtonComponent
   ],
   imports: [
     BrowserModule,

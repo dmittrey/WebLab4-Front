@@ -42,55 +42,55 @@
         </select>
       </div>
     </div>
-
-    <div id="Error_text">
-
-      <!--      /* X alerts */-->
-      <div *ngIf="xSelect.dirty || xSelect.touched">
-        <div *ngIf="xSelect.hasError('required')">
-          <app-alert-field className="requiredAlert"
-                           innerText="X coordinate is empty!"></app-alert-field>
-        </div>
-      </div>
-
-      <div *ngIf="yText.dirty || yText.touched">
-        <div *ngIf="yText.hasError('required')">
-          <app-alert-field className="requiredAlert"
-                           innerText="Y coordinate is empty!"></app-alert-field>
-        </div>
-        <div *ngIf="yText.hasError('pattern')">
-          <app-alert-field className="patternAlert"
-                           innerText="Y coordinate should be float value!"></app-alert-field>
-        </div>
-        <div *ngIf="yText.hasError('min')">
-          <app-alert-field className="minAlert"
-                           innerText="Y coordinate should be great than -5!"></app-alert-field>
-        </div>
-        <div *ngIf="yText.hasError('max')">
-          <app-alert-field className="maxAlert"
-                           innerText="Y coordinate should be less than 3!"></app-alert-field>
-        </div>
-      </div>
-
-      <div *ngIf="rSelect.dirty || rSelect.touched">
-        <div *ngIf="rSelect.hasError('required')">
-          <app-alert-field className="requiredAlert"
-                           innerText="R coordinate is empty!"></app-alert-field>
-        </div>
-        <div *ngIf="rSelect.hasError('min')">
-          <app-alert-field className="minAlert"
-                           innerText="R coordinate is empty!"></app-alert-field>
-        </div>
-      </div>
-    </div>
-
-    <div class="buttons">
-      <button
-        (click)="submit()"
-        [disabled]="this.userInput.invalid"
-        class="btn btn-default">
-        Добавить
-      </button>
-    </div>
   </form>
+
+  <div id="Error_text">
+
+    <!--      /* X alerts */-->
+    <div *ngIf="xSelect.dirty || xSelect.touched">
+      <div *ngIf="xSelect.hasError('required')">
+        <app-alert-field className="requiredAlert"
+                         innerText="X coordinate is empty!"></app-alert-field>
+      </div>
+    </div>
+
+    <div *ngIf="yText.dirty || yText.touched">
+      <div *ngIf="yText.hasError('required')">
+        <app-alert-field className="requiredAlert"
+                         innerText="Y coordinate is empty!"></app-alert-field>
+      </div>
+      <div *ngIf="yText.hasError('pattern')">
+        <app-alert-field className="patternAlert"
+                         innerText="Y coordinate should be float value!"></app-alert-field>
+      </div>
+      <div *ngIf="yText.hasError('min')">
+        <app-alert-field className="minAlert"
+                         innerText="Y coordinate should be great than -5!"></app-alert-field>
+      </div>
+      <div *ngIf="yText.hasError('max')">
+        <app-alert-field className="maxAlert"
+                         innerText="Y coordinate should be less than 3!"></app-alert-field>
+      </div>
+    </div>
+
+    <div *ngIf="rSelect.dirty || rSelect.touched">
+      <div *ngIf="rSelect.hasError('required')">
+        <app-alert-field className="requiredAlert"
+                         innerText="R coordinate is empty!"></app-alert-field>
+      </div>
+      <div *ngIf="rSelect.hasError('min')">
+        <app-alert-field className="minAlert"
+                         innerText="R coordinate is empty!"></app-alert-field>
+      </div>
+    </div>
+  </div>
+
+  <div id="buttons">
+    <button
+      (click)="submit()"
+      [disabled]="this.userInput.invalid"
+      class="btn btn-default">
+      Добавить
+    </button>
+  </div>
 </section>

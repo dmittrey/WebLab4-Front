@@ -1,43 +1,147 @@
-@function toVh($value) {
-  @return $value / 100vw * 100vh;
+@media (min-width: 1267px) {
+  entry-page-header {
+    position: absolute;
+    width: 100vw;
+    height: 3vw;
+    font-size: 3vw;
+  }
+
+  app-exit-button {
+    position: absolute;
+    right: 1vw;
+    width: 4vw;
+    height: 2.5vw;
+    font-size: 2vw;
+  }
+
+  app-plot {
+    position: absolute;
+    left: 10vw;
+    top: 8vw;
+    width: 25vw;
+    height: 25vw;
+  }
+
+  app-user-input {
+    position: absolute;
+    right: 10vw;
+    top: 8vw;
+    width: 25vw;
+
+    #form {
+      font-size: 2vw;
+    }
+
+    #Error_text {
+      font-size: 2vw;
+    }
+
+    #buttons {
+      button {
+        font-size: 2vw;
+      }
+    }
+  }
+
+  app-table {
+    position: absolute;
+    left: 10vw;
+    top: 35vw;
+    width: 80vw;
+
+    #cleaner {
+      button {
+        font-size: 2vw;
+      }
+    }
+
+    #hitTable {
+      font-size: 2vw;
+    }
+  }
 }
 
-$width: 100vw;
-$height: toVh(95vw);
+@media (min-width: 780px) and (max-width: 1267px) {
+  entry-page-header {
+    position: absolute;
+    width: 100vw;
+    height: 3vw;
+    font-size: 3vw;
+  }
 
-$plot-width: 5 * $width/15;
+  app-exit-button {
+    position: absolute;
+    right: 1vw;
+    width: 4vw;
+    height: 3vw;
+    font-size: 2vw;
+  }
 
-$user-input-width: 5 * $width/15;
+  app-plot {
+    position: absolute;
+    left: 5vw;
+    top: 8vw;
+    width: 50vw;
+    height: 50vw;
+  }
 
-$box-shadow-unit: 0.01 * $plot-width; // 5px
+  app-user-input {
+    position: absolute;
+    right: 5vw;
+    top: 8vw;
+    width: 37vw;
+    min-height: 30vw;
+  }
 
-$plot-left-offset: $width/15;
-$plot-top-offset: 2 * $height/15;
-
-$user-input-left-offset: 9 * $width/15;
-$user-input-top-offset: 2 * $height/15;
-
-$table-left-offset: $width/15;
-$table-top-offset: 12 * $height/15;
-
-$table-width: 14 * $width/15;
-
-// 1/15 | 5/15 | 3/15 | 5/15 | 1/15
-
-app-plot {
-  position: absolute;
-  left: $plot-left-offset;
-  top: $plot-top-offset;
+  app-table {
+    position: absolute;
+    right: 5vw;
+    top: 60vw;
+    width: 90vw;
+  }
 }
 
-app-user-input {
-  position: absolute;
-  left: $user-input-left-offset;
-  top: $user-input-top-offset;
+@media (max-width: 780px) {
+  entry-page-header {
+    position: absolute;
+    width: 100vw;
+    height: 7vw;
+    font-size: 5vw;
+  }
+
+  app-exit-button {
+    position: absolute;
+    right: 3vw;
+    top: 7vw;
+    width: 9vw;
+    height: 5vw;
+    font-size: 4vw;
+  }
+
+  app-plot {
+    position: relative;
+    display: block;
+    left: 15vw;
+    top: 10vw;
+    width: 70vw;
+    height: 70vw;
+  }
+
+  app-user-input {
+    position: relative;
+    display: block;
+    left: 15vw;
+    top: 15vw;
+    width: 70vw;
+  }
+
+  app-table {
+    position: relative;
+    display: block;
+    top: 20vw;
+    left: 5%;
+    width: 90%;
+  }
 }
 
-app-table {
-  position: absolute;
-  left: $table-left-offset;
-  top: $table-top-offset;
-}
+

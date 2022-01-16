@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(private httpService: HttpService,
               private formConverter: FormConverterService) {
-    this.isLoggedIn = false;
+    this.isLoggedIn = true;
   }
 
   loginUser(loginData: FormGroup): Observable<AuthResponse> {
