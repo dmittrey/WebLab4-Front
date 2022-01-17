@@ -15,13 +15,14 @@ import {Point} from "../utility/Point";
 })
 export class HttpService {
 
-  token!: string;
+  token: string;
 
   private authUrl = 'http://localhost:8080/user';
   private hitServeUrl = 'http://localhost:8080/hit';
 
   constructor(private http: HttpClient,
               private errorHandler: HandleErrorService) {
+    this.token = "";
   }
 
   authHttpRequest(authRequest: AuthRequest, authType: AuthType): Observable<AuthResponse> {
@@ -47,5 +48,9 @@ export class HttpService {
       tap((hitResponse) => console.log(hitResponse)),
       catchError(this.errorHandler.handleHTTPError)
     );
+  }
+
+  clearToken(): void {
+    this.token = "";
   }
 }
