@@ -1,10 +1,13 @@
 import {Injectable} from "@angular/core";
-import {Observable, tap} from "rxjs";
+import {Observer} from "rxjs";
 import {AuthResponse} from "../utility/AuthResponse";
 import {FormGroup} from "@angular/forms";
 import {FormConverterService} from "./form.converter.service";
 import {HttpService} from "./http.service";
 import {AuthType} from "../utility/AuthType";
+import {NavigationService} from "./navigation.service";
+import {AlertService} from "./alert.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -14,28 +17,31 @@ export class AuthService {
   isLoggedIn: boolean;
 
   constructor(private httpService: HttpService,
-              private formConverter: FormConverterService) {
+              private formConverter: FormConverterService,
+              private navigationService: NavigationService,
+              private alertService: AlertService) {
     this.isLoggedIn = false;
   }
 
-  loginUser(loginData: FormGroup): Observable<AuthResponse> {
-    return this.httpService.authHttpRequest(
-      this.formConverter.convertAuthToRequest(loginData), AuthType.LOGIN
-    ).pipe(
-      tap(() => {
-        this.isLoggedIn = true;
-      })
-    );
+  private authObserver: Observer<AuthResponse> = {
+    next: () => {
+      this.isLoggedIn = true;
+      this.navigationService.goToMain();
+    },
+
+    error: (err: HttpErrorResponse) => this.alertService.injectAlert(err),
+
+    complete: () => console.log("Auth service completed!")
+  }
+
+  loginUser(loginData: FormGroup): void {
+    this.httpService.authHttpRequest(
+      this.formConverter.convertAuthToRequest(loginData), AuthType.LOGIN).subscribe(this.authObserver);
   };
 
-  registerUser(registerData: FormGroup): Observable<AuthResponse> {
-    return this.httpService.authHttpRequest(
-      this.formConverter.convertAuthToRequest(registerData), AuthType.REGISTER
-    ).pipe(
-      tap(() => {
-        this.isLoggedIn = true;
-      })
-    );
+  registerUser(registerData: FormGroup): void {
+    this.httpService.authHttpRequest(
+      this.formConverter.convertAuthToRequest(registerData), AuthType.REGISTER).subscribe(this.authObserver);
   };
 
   logout(): void {

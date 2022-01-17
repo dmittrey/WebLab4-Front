@@ -8,9 +8,13 @@ import {Component, Input} from '@angular/core';
 export class AlertFieldComponent {
 
   @Input()
-  className!: string;
+  className: string;
 
   @Input()
-  innerText!: string;
+  innerText: string;
 
+  constructor() {
+    this.className = "alert";
+    this.innerText = "";
+  }
 }
