@@ -61,7 +61,7 @@
     <!--    5. check whether the entered password has a special character-->
     <div *ngIf="password.hasError('hasSpecialCharacters')">
       <app-alert-field className="hasSpecialCharactersAlert"
-                       innerText="Password should have a special characters: [!@#$%^&*()_+-=[]{};':|,.<>\/?]"></app-alert-field>
+                       innerText="Password should have one of a special characters: [!@#$%^&+=_]"></app-alert-field>
     </div>
 
     <!--    6. Has a minimum length of 8 characters-->

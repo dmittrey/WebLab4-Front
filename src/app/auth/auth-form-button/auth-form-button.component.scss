@@ -1,0 +1,43 @@
+/* Submit button */
+.double-border-button {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  margin: 2%;
+  padding: 2%;
+  color: rgba(24, 24, 24, 0.83);
+  font-family: 'Montserrat', sans-serif;
+  //left: $submit-button-left-offset * $width;
+  //top: $submit-button-top-offset * $height;
+  color: white;
+  font-size: 1.5vw;
+  z-index: 999;
+}
+
+.double-border-button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  border: 2px solid #23a2f6;
+  transition: .4s;
+}
+
+.double-border-button:hover:after {
+  border-color: #ff512f;
+  width: calc(100% - 1vw);
+  height: calc(100% + 1vh);
+}
+
+.forbidden {
+  cursor: not-allowed;
+}
+
+app-auth-form-button:not(.forbidden) {
+  cursor: pointer;
+}

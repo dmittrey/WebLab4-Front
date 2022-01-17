@@ -40,7 +40,7 @@ export class AuthFormRegisterComponent {
       CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
 
       // 5. check whether the entered password has a special character
-      CustomValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"|,.<>\/?]/, {hasSpecialCharacters: true}),
+      CustomValidators.patternValidator(/[ \[!@#$%^&+=_\] ]/, {hasSpecialCharacters: true}),
 
       // 6. Has a minimum length of 8 characters
       Validators.minLength(8)

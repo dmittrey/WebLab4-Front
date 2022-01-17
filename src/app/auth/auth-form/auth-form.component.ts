@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {AuthStatus} from "../AuthStatus";
 import {AuthFormLoginComponent} from "../auth-form-login/auth-form-login.component";
 import {AuthFormRegisterComponent} from "../auth-form-register/auth-form-register.component";
@@ -8,7 +17,8 @@ import {AuthService} from "../../services/auth.service";
 import {FormGroup} from "@angular/forms";
 import {AuthResponse} from "../../utility/AuthResponse";
 import {NavigationService} from "../../services/navigation.service";
-import {Observer} from "rxjs";
+import {Observer, Subscription} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-auth-form',
@@ -18,24 +28,6 @@ import {Observer} from "rxjs";
 })
 export class AuthFormComponent implements AfterViewInit {
 
-  /* Observers(Define typical behave for submitRegister/submitLogin) */
-  loginObserver: Observer<AuthResponse> = {
-    next: (value) => {
-      console.log("Login successful!");
-      console.log(value);
-      this.navigationService.goToMain();
-    },
-    error: err => console.log("Error while logging: " + err),
-    complete: () => console.log("Auth service has been completed while logging!")
-  }
-  registerObserver: Observer<AuthResponse> = {
-    next: () => {
-      console.log("Register successful!");
-      this.navigationService.goToMain();
-    },
-    error: err => console.log("Error while register: " + err),
-    complete: () => console.log("Auth service has been completed while register!")
-  }
   /* Child components */
   @ViewChild(AuthFormLoginComponent)
   private loginComponent!: AuthFormLoginComponent;
@@ -48,8 +40,7 @@ export class AuthFormComponent implements AfterViewInit {
   @ViewChild(AuthFormSwitcherComponent)
   private authSwitcher!: AuthFormSwitcherComponent;
 
-  constructor(private authService: AuthService,
-              private navigationService: NavigationService) {
+  constructor(private authService: AuthService) {
   }
 
   /* Methods to access child components variables */
@@ -58,11 +49,11 @@ export class AuthFormComponent implements AfterViewInit {
   }
 
   submitLogin(loginForm: FormGroup) {
-    this.authService.loginUser(loginForm).subscribe(this.loginObserver);
+    this.authService.loginUser(loginForm);
   }
 
   submitRegister(registerForm: FormGroup) {
-    this.authService.registerUser(registerForm).subscribe(this.registerObserver);
+    this.authService.registerUser(registerForm);
   }
 
   /* Local logic */
@@ -80,5 +71,4 @@ export class AuthFormComponent implements AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => this.authStatus = () => this.authSwitcher.authStatus, 0);
   }
-
 }

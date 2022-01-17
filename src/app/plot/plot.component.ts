@@ -59,7 +59,11 @@ export class PlotComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.hitServiceSubscription = this.hitService.hitRequestStatus$.subscribe({
       next: value => {
-        if (value == null) this.SvgComponent.cleanPlot();
+        console.log(value);
+        if (value) {
+          console.log("Plot cleared!");
+          this.SvgComponent.cleanPlot();
+        }
 
         console.log("Hit service status updated: ");
 

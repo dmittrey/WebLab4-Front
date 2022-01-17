@@ -33,6 +33,8 @@ import {
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
 import {ExitButtonComponent} from './exit-button/exit-button.component';
+import { AuthAlertComponent } from './auth-alert/auth-alert.component';
+import {AlertService} from "./services/alert.service";
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import {ExitButtonComponent} from './exit-button/exit-button.component';
     TableComponent,
     UserInputComponent,
     SvgComponent,
-    ExitButtonComponent
+    ExitButtonComponent,
+    AuthAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import {ExitButtonComponent} from './exit-button/exit-button.component';
     FormConverterService,
     NavigationService,
     HttpService,
-    ValueTransferService
+    ValueTransferService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

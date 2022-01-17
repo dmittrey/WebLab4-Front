@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Subscription} from "rxjs";
 import {HitService} from "../services/hit.service";
 import {Point} from "../utility/Point";
@@ -6,7 +6,8 @@ import {Point} from "../utility/Point";
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TableComponent implements OnInit, OnDestroy {
 
@@ -39,5 +40,4 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.hitServiceSubscription.unsubscribe();
   }
-
 }

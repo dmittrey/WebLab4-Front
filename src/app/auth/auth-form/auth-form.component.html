@@ -1,8 +1,9 @@
 <div class="background">
-  <app-auth-form-switcher></app-auth-form-switcher>
 
   <div class="shape" id="blueCircle"></div>
   <div class="shape" id="orangeCircle"></div>
+
+  <app-auth-form-switcher></app-auth-form-switcher>
 
   <div class="authForm">
     <app-auth-form-login (login)="submitLogin($event)" *ngIf="isLoginStatus()"></app-auth-form-login>

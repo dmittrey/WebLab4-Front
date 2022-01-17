@@ -66,9 +66,23 @@
       border-radius: 2vw;
       cursor: pointer;
       color: whitesmoke;
-      width: 30%;
       height: 60%;
       margin: 2%;
+
+      @media (min-width: 1267px) {
+        width: 35%;
+        font-size: 1.5vw;
+      }
+
+      @media (min-width: 780px) and (max-width: 1267px) {
+        width: 30%;
+        font-size: 2vw;
+      }
+
+      @media (max-width: 780px) {
+        width: 45%;
+        font-size: 100%;
+      }
 
       &:disabled {
         border: 0.1vw solid #999999;

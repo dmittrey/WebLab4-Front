@@ -44,9 +44,7 @@ export class AuthFormLoginComponent {
   }
 
   submit() {
-    console.log(this.loginFormGroup.valid);
     if (this.loginFormGroup.valid) {
-      // console.log(this.loginFormGroup.value);
       this.login.emit(this.loginFormGroup);
     }
   }

@@ -1,7 +1,7 @@
 .switch-contents {
-  text-align: center;
   position: relative;
-  top: 5vh;
+  text-align: center;
+  //top: 100%;
   z-index: 999;
 }
 
@@ -17,7 +17,6 @@ input[name="layout"] {
 label {
   display: inline-block;
   margin: 0 1em;
-  font-size: 1.5vw;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   cursor: pointer;

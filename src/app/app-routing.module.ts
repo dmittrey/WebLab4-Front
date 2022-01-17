@@ -5,9 +5,9 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-  {path: 'entry', component: EntryPageComponent},
+  {path: '', component: EntryPageComponent},
   {path: 'main', component: MainPageComponent, canActivate: [AuthGuard]},
-  {path: '**', redirectTo: 'entry'}
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

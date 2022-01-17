@@ -1,1 +1,78 @@
+@media (min-width: 1267px) {
+  entry-page-header {
+    position: absolute;
+    width: 100vw;
+    height: 3vw;
+    font-size: 3vw;
+  }
 
+  app-auth-alert {
+    position: absolute;
+    left: 30vw;
+    top: 4vw;
+    width: 40vw;
+    height: 2.5vw;
+    font-size:2vw;
+    text-align: center;
+  }
+
+  app-auth-form {
+    position: absolute;
+    left: 30vw;
+    top: 10vw;
+    width: 40vw;
+  }
+}
+
+@media (min-width: 780px) and (max-width: 1267px) {
+  entry-page-header {
+    position: absolute;
+    width: 100vw;
+    height: 3vw;
+    font-size: 3vw;
+  }
+
+  app-auth-alert {
+    position: absolute;
+    left: 25vw;
+    top: 4vw;
+    width: 50vw;
+    height: 5vw;
+    font-size:4vw;
+    text-align: center;
+  }
+
+  app-auth-form {
+    position: absolute;
+    left: 25vw;
+    top: 10vw;
+    width: 50vw;
+  }
+}
+
+@media (max-width: 780px) {
+  entry-page-header {
+    position: absolute;
+    width: 100vw;
+    height: 7vw;
+    font-size: 5vw;
+  }
+
+  app-auth-alert {
+    position: absolute;
+    left: 25vw;
+    top: 8vw;
+    width: 50vw;
+    height: 5vw;
+    font-size:5vw;
+    text-align: center;
+  }
+
+  app-auth-form {
+    position: absolute;
+    left: 15vw;
+    top: 17vw;
+    width: 70vw;
+    font-size: 2vw;
+  }
+}
