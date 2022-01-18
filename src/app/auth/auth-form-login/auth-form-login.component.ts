@@ -48,5 +48,4 @@ export class AuthFormLoginComponent {
       this.login.emit(this.loginFormGroup);
     }
   }
-
 }

@@ -14,24 +14,28 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class AuthService {
 
-  isLoggedIn: boolean;
-
-  constructor(private httpService: HttpService,
-              private formConverter: FormConverterService,
-              private navigationService: NavigationService,
-              private alertService: AlertService) {
-    this.isLoggedIn = false;
-  }
+  private loggedStatus: boolean;
 
   private authObserver: Observer<AuthResponse> = {
     next: () => {
-      this.isLoggedIn = true;
+      this.loggedStatus = true;
       this.navigationService.goToMain();
     },
 
     error: (err: HttpErrorResponse) => this.alertService.injectAlert(err),
 
     complete: () => console.log("Auth service completed!")
+  }
+
+  constructor(private httpService: HttpService,
+              private formConverter: FormConverterService,
+              private navigationService: NavigationService,
+              private alertService: AlertService) {
+    this.loggedStatus = false;
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedStatus;
   }
 
   loginUser(loginData: FormGroup): void {
@@ -45,7 +49,7 @@ export class AuthService {
   };
 
   logout(): void {
-    this.isLoggedIn = false;
+    this.loggedStatus = false;
     this.httpService.clearToken();
   }
 }

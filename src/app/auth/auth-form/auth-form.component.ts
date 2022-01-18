@@ -1,10 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -15,10 +11,6 @@ import {AuthFormButtonComponent} from "../auth-form-button/auth-form-button.comp
 import {AuthFormSwitcherComponent} from "../auth-form-switcher/auth-form-switcher.component";
 import {AuthService} from "../../services/auth.service";
 import {FormGroup} from "@angular/forms";
-import {AuthResponse} from "../../utility/AuthResponse";
-import {NavigationService} from "../../services/navigation.service";
-import {Observer, Subscription} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-auth-form',
@@ -28,22 +20,21 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class AuthFormComponent implements AfterViewInit {
 
-  /* Child components */
   @ViewChild(AuthFormLoginComponent)
   private loginComponent!: AuthFormLoginComponent;
+
   @ViewChild(AuthFormRegisterComponent)
   private registerComponent!: AuthFormRegisterComponent;
+
   @ViewChild(AuthFormButtonComponent)
   private submitButton!: AuthFormButtonComponent;
 
-  /* Методы вызываемые из дочерних компонентов */
   @ViewChild(AuthFormSwitcherComponent)
   private authSwitcher!: AuthFormSwitcherComponent;
 
   constructor(private authService: AuthService) {
   }
 
-  /* Methods to access child components variables */
   authStatus(): AuthStatus {
     return 0;
   }
@@ -55,8 +46,6 @@ export class AuthFormComponent implements AfterViewInit {
   submitRegister(registerForm: FormGroup) {
     this.authService.registerUser(registerForm);
   }
-
-  /* Local logic */
 
   /* (Меняем состояние окна в template через ngIf) */
   isLoginStatus(): boolean {

@@ -13,7 +13,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertFieldComponent} from './alert-field/alert-field.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from "./services/auth.service";
-import {HandleErrorService} from "./services/handle.error.service";
 import {FormConverterService} from "./services/form.converter.service";
 import {AppRoutingModule} from './app-routing.module';
 import {MainPageComponent} from './main-page/main-page.component';
@@ -33,7 +32,7 @@ import {
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
 import {ExitButtonComponent} from './exit-button/exit-button.component';
-import { AuthAlertComponent } from './auth-alert/auth-alert.component';
+import {AuthAlertComponent} from './auth-alert/auth-alert.component';
 import {AlertService} from "./services/alert.service";
 
 @NgModule({
@@ -64,14 +63,12 @@ import {AlertService} from "./services/alert.service";
     NgOptionHighlightModule,
     CommonModule,
     FormsModule,
-    NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
-    //@ts-ignore
+    NgxAwesomePopupModule.forRoot(),
     ToastNotificationConfigModule.forRoot({globalSettings: {allowedNotificationsAtOnce: 1}})
   ],
   providers: [
     AuthService,
     HitService,
-    HandleErrorService,
     FormConverterService,
     NavigationService,
     HttpService,

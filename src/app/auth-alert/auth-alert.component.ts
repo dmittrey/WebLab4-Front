@@ -9,7 +9,7 @@ import {AlertService} from "../services/alert.service";
 })
 export class AuthAlertComponent implements OnInit, OnDestroy {
 
-  alertServiceSubscription!: Subscription;
+  alertServiceSubscription?: Subscription;
 
   alertText: string;
 
@@ -40,6 +40,6 @@ export class AuthAlertComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alertServiceSubscription.unsubscribe();
+    this.alertServiceSubscription?.unsubscribe();
   }
 }

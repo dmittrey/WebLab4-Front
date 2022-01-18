@@ -9,7 +9,7 @@ import {AuthStatus} from "../AuthStatus";
 })
 export class AuthFormSwitcherComponent {
 
-  authStatus!: AuthStatus;
+  authStatus: AuthStatus;
 
   constructor() {
     this.authStatus = AuthStatus.LOGIN;

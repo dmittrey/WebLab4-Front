@@ -8,12 +8,10 @@ export class NavigationService {
   }
 
   goToMain() {
-    console.log("Go to main!");
-    this.router.navigate(['/main']);
+    this.router.navigate(['/main']).then(() => console.log("Go to main!"));
   }
 
   goToEntry() {
-    console.log("Go to entry!");
-    this.router.navigate(['/entry']);
+    this.router.navigate(['/entry']).then(() => console.log("Go to entry!"));
   }
 }
