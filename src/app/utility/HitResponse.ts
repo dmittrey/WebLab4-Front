@@ -1,3 +1,7 @@
+import {HitRequestType} from "./HitRequestType";
+import {Point} from "./Point";
+
 export interface HitResponse {
-  data: string;
+  data: Point[];
+  typeOfHitResponse: HitRequestType;
 }

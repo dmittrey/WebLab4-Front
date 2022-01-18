@@ -70,5 +70,4 @@ export class UserInputComponent {
       rValue: this.rSelect.value.value.toString()
     });
   }
-
 }

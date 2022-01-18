@@ -4,21 +4,19 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthRequest} from "../utility/AuthRequest";
 import {HitRequest} from "../utility/HitRequest";
 import {Observable, tap, timeout} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {HandleErrorService} from "./handle.error.service";
 import {AuthType} from "../utility/AuthType";
 import {HitRequestType} from "../utility/HitRequestType";
-import {Point} from "../utility/Point";
+import {HitResponse} from "../utility/HitResponse";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  token: string;
+  private token: string;
 
-  private authUrl = 'http://192.168.0.193:8080/user';
-  private hitServeUrl = 'http://192.168.0.193:8080/hit';
+  private authUrl = 'http://localhost:8080/user';
+  private hitServeUrl = 'http://localhost:8080/hit';
 
   constructor(private http: HttpClient) {
     this.token = "";
@@ -31,16 +29,25 @@ export class HttpService {
     }).pipe(
       timeout(3000),
       tap(
-        (authResponse) => {
-          console.log(authResponse.token);
-          this.token = authResponse.token;
-        })
+        (authResponse) => this.token = authResponse.token
+      )
     );
   }
 
-  hitHttpRequest(hitRequest: HitRequest | null, hitRequestType: HitRequestType): Observable<Point[]> {
-    console.log(hitRequest);
-    return this.http.post<Point[]>(this.hitServeUrl.concat("/", hitRequestType), hitRequest, {
+  hitPostHttpRequest(hitRequest: HitRequest | null, hitRequestType: HitRequestType): Observable<HitResponse> {
+    return this.http.post<HitResponse>(this.hitServeUrl.concat("/", hitRequestType), hitRequest, {
+      observe: 'body',
+      responseType: 'json',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer_'.concat(this.token)
+      })
+    }).pipe(
+      timeout(3000)
+    )
+  }
+
+  hitGetHttpRequest(hitRequestType: HitRequestType): Observable<HitResponse> {
+    return this.http.get<HitResponse>(this.hitServeUrl.concat("/", hitRequestType), {
       observe: 'body',
       responseType: 'json',
       headers: new HttpHeaders({
